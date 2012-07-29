@@ -383,6 +383,38 @@ defaults write com.twitter.twitter-mac ESCClosesComposeWindow -bool true
 defaults write com.twitter.twitter-mac HideInBackground -bool true
 
 ###############################################################################
+# Personal Additions                                                          #
+###############################################################################
+# Delete space hogging sleep image when an SSD is installed
+rm /private/var/vm/sleepimage
+pmset -a hibernatemode 0
+
+# Deactivate dynamic paging
+# http://workstuff.tumblr.com/post/20464780085/something-is-deeply-broken-in-os-x-memory-management
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist
+
+# Reactivate dynamic paging
+# sudo launchctl load -wF /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist
+
+# Turn off Elastic scroll effect
+# http://hints.macworld.com/article.php?story=20120509063823940
+defaults write -g NSScrollViewRubberbanding -int 0
+# Revert back to Elastic scroll effect
+# defaults delete -g NSScrollViewRubberbanding
+
+# Show/hide Spotlight icon in menubar
+# Hide
+sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+# Show
+# sudo chmod 755 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+
+# Enable Single Application Mode
+# defaults write com.apple.dock single-app -bool true
+
+# Show dotfiles in Finder
+# defaults write com.apple.finder AppleShowAllFiles TRUE
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 

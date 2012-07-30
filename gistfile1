@@ -414,8 +414,16 @@ sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 # Show dotfiles in Finder
 # defaults write com.apple.finder AppleShowAllFiles TRUE
 
+# Remove Notification Center from Menubar
+sudo launchctl remove com.apple.notificationcenterui.agent
+launchctl remove com.apple.notificationcenterui.agent
+
+# Add Notification Center to Menubar 
+sudo launchctl submit -l com.apple.notificationcenterui.agent -p /System/Library/CoreServices/NotificationCenter.app/Contents/MacOS/NotificationCenter
+
+
 ###############################################################################
-# Kill affected applications                                                  #
+# Sublime Text 2                                                              #
 ###############################################################################
 # Link Sublime Text 2 command line
 ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /bin/subl

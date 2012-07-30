@@ -419,7 +419,7 @@ sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 ###############################################################################
 # Link Sublime Text 2 command line
 mkdir ~/bin
-ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /bin/subl
 
 # Set Git to use Sublime Text 2 as default editor
 git config --global core.editor "subl -n -w"

@@ -417,6 +417,12 @@ sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
+# Link Sublime Text 2 command line
+ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+
+###############################################################################
+# Kill affected applications                                                  #
+###############################################################################
 
 for app in Finder Dock Mail Safari iTunes iCal Address\ Book SystemUIServer Twitter; do
 	killall "$app" > /dev/null 2>&1

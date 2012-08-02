@@ -389,9 +389,9 @@ defaults write com.twitter.twitter-mac HideInBackground -bool true
 rm /private/var/vm/sleepimage
 pmset -a hibernatemode 0
 
-# Deactivate dynamic paging
-# http://workstuff.tumblr.com/post/20464780085/something-is-deeply-broken-in-os-x-memory-management
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist
+# Deactivate dynamic paging in Lion http://workstuff.tumblr.com/post/20464780085/something-is-deeply-broken-in-os-x-memory-management
+# EDIT: Apparently this has been fixed in Mountain Lion? http://workstuff.tumblr.com/post/28556080639/mountain-lion-seems-to-have-partially-addressed-the
+# sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist
 
 # Reactivate dynamic paging
 # sudo launchctl load -wF /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist

@@ -415,11 +415,10 @@ sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 # defaults write com.apple.finder AppleShowAllFiles TRUE
 
 # Remove Notification Center from Menubar
-sudo launchctl remove com.apple.notificationcenterui.agent
 launchctl remove com.apple.notificationcenterui.agent
 
 # Add Notification Center to Menubar 
-# sudo launchctl submit -l com.apple.notificationcenterui.agent -p /System/Library/CoreServices/NotificationCenter.app/Contents/MacOS/NotificationCenter
+# launchctl submit -l com.apple.notificationcenterui.agent -p /System/Library/CoreServices/NotificationCenter.app/Contents/MacOS/NotificationCenter
 
 
 ###############################################################################

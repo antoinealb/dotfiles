@@ -419,7 +419,7 @@ sudo launchctl remove com.apple.notificationcenterui.agent
 launchctl remove com.apple.notificationcenterui.agent
 
 # Add Notification Center to Menubar 
-sudo launchctl submit -l com.apple.notificationcenterui.agent -p /System/Library/CoreServices/NotificationCenter.app/Contents/MacOS/NotificationCenter
+# sudo launchctl submit -l com.apple.notificationcenterui.agent -p /System/Library/CoreServices/NotificationCenter.app/Contents/MacOS/NotificationCenter
 
 
 ###############################################################################

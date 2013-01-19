@@ -267,6 +267,10 @@ launchctl remove com.apple.notificationcenterui.agent
 # Add Notification Center to Menubar 
 # launchctl submit -l com.apple.notificationcenterui.agent -p /System/Library/CoreServices/NotificationCenter.app/Contents/MacOS/NotificationCenter
 
+# disable OS X logging of downloaded files
+# http://www.macgasm.net/2013/01/18/good-morning-your-mac-keeps-a-log-of-all-your-downloads/
+defaults write com.apple.LaunchServices LSQuarantine -bool NO.
+
 ###############################################################################
 # Sublime Text 2                                                              #
 ###############################################################################

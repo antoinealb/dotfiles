@@ -73,7 +73,7 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Display ASCII control characters using caret notation in standard text views
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 echo ""
-echo "Do some ASCII shit"
+echo "Doing some ASCII shit"
 defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 
 # Disable Resume system-wide
@@ -137,7 +137,7 @@ else
 fi
 
 echo ""
-echo "What format should screenshots be saved as? (options: BMP, GIF, JPG, PDF, TIFF) "
+echo "What format should screenshots be saved as? (default PNG, options: BMP, GIF, JPG, PDF, TIFF) "
 read screenshot_format
 if [ -z "$1" ]
 then

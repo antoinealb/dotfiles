@@ -384,6 +384,7 @@ done
 # Kill affected applications                                                  #
 ###############################################################################
 
+echo ""
 echo "Done!"
 echo ""
 echo ""

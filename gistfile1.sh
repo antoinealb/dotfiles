@@ -359,7 +359,7 @@ echo "Disable OS X logging of downloaded files? (highly advised)"
 echo "For more info visit http://www.macgasm.net/2013/01/18/good-morning-your-mac-keeps-a-log-of-all-your-downloads/"
 select yn in "Yes" "No"; do
     case $yn in
-        Yes ) defaults write com.apple.LaunchServices LSQuarantine -bool NO.
+        Yes ) defaults write com.apple.LaunchServices LSQuarantine -bool NO
               break;;
         No ) exit;;
     esac

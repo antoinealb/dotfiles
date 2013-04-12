@@ -17,7 +17,8 @@ fi
 #         No ) exit;;
 #     esac
 # done
-
+echo "###############################################################################"
+echo ""
 echo "This script will make your Mac awesome. Follow the prompts and you'll be fine."
 echo ""
 echo "Happy Hacking!"

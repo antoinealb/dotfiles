@@ -48,7 +48,7 @@ done
 # - Time Machine
 # - Volume
 echo ""
-echo "Hide the useless Time Machine, Volume, Bluetooth and Spotlight icons? "
+echo "Hide the useless User, Time Machine, Volume, Bluetooth and Spotlight icons? "
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"

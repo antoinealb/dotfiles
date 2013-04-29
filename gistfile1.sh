@@ -355,6 +355,10 @@ echo "Deleting space hogging sleep image and disabling"
 rm /private/var/vm/sleepimage
 pmset -a hibernatemode 0
 
+echo "Speed up wake from sleep to 24 hours from an hour"
+# http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
+pmset -a standbydelay 86400
+
 echo "Disable OS X logging of downloaded files? (highly advised)"
 echo "For more info visit http://www.macgasm.net/2013/01/18/good-morning-your-mac-keeps-a-log-of-all-your-downloads/"
 select yn in "Yes" "No"; do

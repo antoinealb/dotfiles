@@ -385,6 +385,19 @@ select yn in "Yes" "No"; do
 done
 
 ###############################################################################
+# Git                                                                         #
+###############################################################################
+echo "Create a nicely formatted git log command accessible via 'git lg'?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) echo "Creating nice git log command"
+              git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+              break;;
+        No ) exit;;
+    esac
+done
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 

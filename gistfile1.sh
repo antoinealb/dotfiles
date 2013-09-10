@@ -48,11 +48,8 @@ select yn in "Yes" "No"; do
     esac
 done
 
-# Menu bar, hide icons for:
-# - Time Machine
-# - Volume
 echo ""
-echo "Hide the useless Time Machine, Volume, Bluetooth and Spotlight icons? "
+echo "Hide the useless menubar icons?"
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
@@ -61,6 +58,18 @@ select yn in "Yes" "No"; do
         No ) break;;
     esac
 done
+
+echo ""
+echo "Disable OS X Gate Keeper?"
+echo "(You'll be able to install any app you want from here on, not just Mac App Store apps)"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) sudo spctl --master-disable
+              break;;
+        No ) break;;
+    esac
+done
+
 echo ""
 echo "Increasing the window resize speed for Cocoa applications whether you like it or not"
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
@@ -96,6 +105,11 @@ echo ""
 echo "OSX Y U TERMINATE INACTIVE APPS? DO NOT DO THAT"
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
+echo ""
+echo "Remove the Guest account"
+defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool NO
+defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server AllowGuestAccess -bool NO
+
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
@@ -116,6 +130,11 @@ defaults write NSGlobalDomain KeyRepeat -int 0
 echo ""
 echo "Disabling auto-correct"
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+echo ""
+echo "Set trackpad & mouse speed to a reasonable number"
+defaults write -g com.apple.mouse.scaling 2
+defaults write -g com.apple.mouse.scaling 2.5
 
 ###############################################################################
 # Screen                                                                      #
@@ -300,7 +319,7 @@ done
 
 
 ###############################################################################
-# Dock & hot corners                                                          #
+# Dock & Mission Control
 ###############################################################################
 
 echo ""
@@ -315,12 +334,16 @@ defaults write com.apple.dock "expose-group-by-app" -bool true
 echo ""
 echo "Setting Dock to auto-hide and removing the auto-hiding delay"
 defaults write com.apple.dock autohide -bool true
-defaults write com.apple.Dock autohide-delay -float 0
+defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0
 
 echo ""
-echo "Enabling iTunes track notifications in the Dock"
-defaults write com.apple.dock itunes-notifications -bool true
+echo "Setting Dock to 2D mode"
+defaults write com.apple.dock no-glass -boolean YES
+
+echo ""
+echo "Pinning the Dock to the left side of the screen for most efficient use of screen realestate"
+defaults write com.apple.dock pinning -string "end"
 
 echo ""
 echo "Reset Launchpad?"
@@ -363,12 +386,12 @@ echo "Adding a context menu item for showing the Web Inspector in web views"
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 ###############################################################################
-# Address Book, Dashboard, iCal, iTunes, Mail, and Disk Utility               #
+# Address Book and iTunes                                                     #
 ###############################################################################
 
 echo ""
-echo "Enabling Dashboard dev mode (allows keeping widgets on the desktop)"
-defaults write com.apple.dashboard devmode -bool true
+echo "Enabling iTunes track notifications in the Dock"
+defaults write com.apple.dock itunes-notifications -bool true
 
 echo ""
 echo "Copy email addresses as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app?"
@@ -476,6 +499,6 @@ echo ""
 echo "Note that some of these changes require a logout/restart to take effect."
 echo "Killing some open applications in order to take effect."
 echo ""
-for app in Finder Dock Mail Safari iTunes iCal Address\ Book SystemUIServer Twitter; do
+for app in Finder Dock Mail Safari iTunes iCal Address\ Book SystemUIServer; do
     killall "$app" > /dev/null 2>&1
 done

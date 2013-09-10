@@ -312,7 +312,7 @@ select yn in "Yes" "No"; do
     case $yn in
         Yes ) chflags nohidden ~/Library
               break;;
-        No ) exit;;
+        No ) break;;
     esac
 done
 

@@ -1,5 +1,3 @@
-# ~/.osx — http://mths.be/osx
-
 # root check
 if [[ $EUID -ne 0 ]]; then
     echo ""
@@ -105,11 +103,6 @@ echo ""
 echo "OSX Y U TERMINATE INACTIVE APPS? DO NOT DO THAT"
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
-echo ""
-echo "Remove the Guest account"
-defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool NO
-defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server AllowGuestAccess -bool NO
-
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
@@ -133,7 +126,7 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 echo ""
 echo "Set trackpad & mouse speed to a reasonable number"
-defaults write -g com.apple.mouse.scaling 2
+defaults write -g com.apple.trackpad.scaling 2
 defaults write -g com.apple.mouse.scaling 2.5
 
 ###############################################################################

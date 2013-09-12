@@ -237,6 +237,11 @@ defaults write com.apple.finder EmptyTrashSecurely -bool true
 # Dock & Mission Control
 ###############################################################################
 
+# Wipe all (default) app icons from the Dock
+# This is only really useful when setting up a new Mac, or if you don’t use
+# the Dock to launch apps.
+#defaults write com.apple.dock persistent-apps -array
+
 echo ""
 echo "Setting the icon size of Dock items to 36 pixels for optimal size/screen-realestate"
 defaults write com.apple.dock tilesize -int 36

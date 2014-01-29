@@ -263,7 +263,7 @@ defaults write com.apple.dock no-glass -boolean YES
 
 echo ""
 echo "Pinning the Dock to the left side of the screen for most efficient use of screen realestate"
-defaults write com.apple.dock pinning -string "end"
+#defaults write com.apple.dock pinning -string "end"
 
 
 ###############################################################################
@@ -371,10 +371,14 @@ select yn in "Yes" "No"; do
               echo ""
               echo "Setting Git to use Sublime Text 2 as default editor"
               git config --global core.editor "subl -n -w"
+              echo ""
+              echo "Removing Mission Control as it interferes with Sublime Text keyboard shortcut for selecting multiple lines"
+              defaults write com.apple.dock mcx-expose-disabled -bool TRUE
               break;;
         No ) break;;
     esac
 done
+
 
 ###############################################################################
 # Git                                                                         #

@@ -26,10 +26,12 @@ echo ""
 
 echo ""
 echo "Setting your computer name (as done via System Preferences → Sharing)"
-scutil --set ComputerName 'ComputerName'
-scutil --set HostName 'ComputerName'
-scutil --set LocalHostName 'ComputerName'
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string 'ComputerName'
+echo "What would you like it to be?"
+read COMPUTER_NAME
+sudo scutil --set ComputerName $COMPUTER_NAME
+sudo scutil --set HostName $COMPUTER_NAME
+sudo scutil --set LocalHostName $COMPUTER_NAME
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
 
 echo ""
 echo "Hiding the useless menubar icons?"

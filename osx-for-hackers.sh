@@ -32,23 +32,20 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 echo ""
-cecho "#####################################"
-cecho "## This script will make your Mac awesome."
-cecho "## Follow the prompts and you'll be fine."
-cecho "#####################################"
-echo ""
-echo ""
-cecho "#####################################"
-cecho "## Happy Hacking!"
-cecho "#####################################"
+echo "##############################################"
+echo "## This script will make your  Mac awesome."
+echo "## Follow the prompts and you'll be fine."
+echo "##"
+echo "##          ~ Happy Hacking! ~"
+echo "#############################################"
 echo ""
 ###############################################################################
 # General UI/UX
 ###############################################################################
 
 echo ""
-cecho "Setting your computer name (as done via System Preferences → Sharing)"
-cecho "What would you like it to be?"
+echo "Setting your computer name (as done via System Preferences → Sharing)"
+echo "What would you like it to be?"
 read COMPUTER_NAME
 sudo scutil --set ComputerName $COMPUTER_NAME
 sudo scutil --set HostName $COMPUTER_NAME
@@ -56,54 +53,54 @@ sudo scutil --set LocalHostName $COMPUTER_NAME
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
 
 echo ""
-cecho "Hiding the useless menubar icons?"
+echo "Hiding the useless menubar icons?"
 defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
 sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 
 echo ""
-cecho "Disabling OS X Gate Keeper"
-cecho "(You'll be able to install any app you want from here on, not just Mac App Store apps)"
+echo "Disabling OS X Gate Keeper"
+echo "(You'll be able to install any app you want from here on, not just Mac App Store apps)"
 sudo spctl --master-disable
 
 echo ""
-cecho "Increasing the window resize speed for Cocoa applications whether you like it or not"
+echo "Increasing the window resize speed for Cocoa applications whether you like it or not"
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 echo ""
-cecho "Expanding the save panel by default"
+echo "Expanding the save panel by default"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
 echo ""
-cecho "Disabling the 'Are you sure you want to open this application from the Internet?' dialog"
+echo "Disabling the 'Are you sure you want to open this application from the Internet?' dialog"
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 echo ""
-cecho "Displaying ASCII control characters using caret notation in standard text views"
+echo "Displaying ASCII control characters using caret notation in standard text views"
 defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 
 echo ""
-cecho "Disabling system-wide resume"
+echo "Disabling system-wide resume"
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
 echo ""
-cecho "Disabling automatic termination of inactive apps"
+echo "Disabling automatic termination of inactive apps"
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
 echo ""
-cecho "Saving to disk (not to iCloud) by default"
+echo "Saving to disk (not to iCloud) by default"
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 echo ""
-cecho "Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
+echo "Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 echo ""
-cecho "Never go into computer sleep mode"
+echo "Never go into computer sleep mode"
 systemsetup -setcomputersleep Off > /dev/null
 
 echo ""
-cecho "Check for software updates daily, not just once per week"
+echo "Check for software updates daily, not just once per week"
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 ###############################################################################
@@ -111,32 +108,32 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 ###############################################################################
 
 echo ""
-cecho "Increasing sound quality for Bluetooth headphones/headsets"
+echo "Increasing sound quality for Bluetooth headphones/headsets"
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
 echo ""
-cecho "Enabling full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
+echo "Enabling full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 echo ""
-cecho "Disabling press-and-hold for keys in favor of key repeat "
+echo "Disabling press-and-hold for keys in favor of key repeat "
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 echo ""
-cecho "Setting a blazingly fast keyboard repeat rate (ain't nobody got time fo special chars while coding!)"
+echo "Setting a blazingly fast keyboard repeat rate (ain't nobody got time fo special chars while coding!)"
 defaults write NSGlobalDomain KeyRepeat -int 0
 
 echo ""
-cecho "Disabling auto-correct"
+echo "Disabling auto-correct"
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 echo ""
-cecho "Setting trackpad & mouse speed to a reasonable number"
+echo "Setting trackpad & mouse speed to a reasonable number"
 defaults write -g com.apple.trackpad.sca  ng 2
 defaults write -g com.apple.mouse.scaling 2.5
 
 echo ""
-cecho "Turn off keyboard illumination when computer is not used for 5 minutes"
+echo "Turn off keyboard illumination when computer is not used for 5 minutes"
 defaults write com.apple.BezelServices kDimTime -int 300
 
 ###############################################################################
@@ -144,40 +141,40 @@ defaults write com.apple.BezelServices kDimTime -int 300
 ###############################################################################
 
 echo ""
-cecho "Requiring password immediately after sleep or screen saver begins"
+echo "Requiring password immediately after sleep or screen saver begins"
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 echo ""
-cecho "Where do you want screenshots to be stored? (hit ENTER if you want ~/Desktop as default)"
+echo "Where do you want screenshots to be stored? (hit ENTER if you want ~/Desktop as default)"
 read screenshot_location
 if [ -z "$1" ]
 then
   echo ""
-  cecho "Setting location to ~/Desktop"
+  echo "Setting location to ~/Desktop"
   defaults write com.apple.screencapture location -string "$HOME/Desktop"
 else
   echo ""
-  cecho "Setting location to ~/$screenshot_location"
+  echo "Setting location to ~/$screenshot_location"
   defaults write com.apple.screencapture location -string "$HOME/$screenshot_location"
 fi
 
 echo ""
-cecho "What format should screenshots be saved as? (hit ENTER for PNG, options: BMP, GIF, JPG, PDF, TIFF) "
+echo "What format should screenshots be saved as? (hit ENTER for PNG, options: BMP, GIF, JPG, PDF, TIFF) "
 read screenshot_format
 if [ -z "$1" ]
 then
   echo ""
-  cecho "Setting screenshot format to PNG"
+  echo "Setting screenshot format to PNG"
   defaults write com.apple.screencapture type -string "png"
 else
   echo ""
-  cecho "Setting screenshot format to $screenshot_format"
+  echo "Setting screenshot format to $screenshot_format"
   defaults write com.apple.screencapture type -string "$screenshot_format"
 fi
 
 
-cecho "Enabling subpixel font rendering on non-Apple LCDs"
+echo "Enabling subpixel font rendering on non-Apple LCDs"
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 ###############################################################################
@@ -185,11 +182,11 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2
 ###############################################################################
 
 echo ""
-cecho "Showing icons for hard drives, servers, and removable media on the desktop"
+echo "Showing icons for hard drives, servers, and removable media on the desktop"
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 
 echo ""
-cecho "Finder: show hidden files by default?"
+echo "Finder: show hidden files by default?"
 select yn in "Yes" "No"; do
   case $yn in
     Yes ) defaults write com.apple.Finder AppleShowAllFiles -bool true
@@ -199,7 +196,7 @@ select yn in "Yes" "No"; do
 done
 
 echo ""
-cecho "Finder: show dotfiles?"
+echo "Finder: show dotfiles?"
 select yn in "Yes" "No"; do
   case $yn in
     Yes ) defaults write com.apple.finder AppleShowAllFiles TRUE
@@ -209,51 +206,51 @@ select yn in "Yes" "No"; do
 done
 
 echo ""
-cecho "Finder: showing all filename extensions"
+echo "Finder: showing all filename extensions"
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 echo ""
-cecho "Finder: showing status bar"
+echo "Finder: showing status bar"
 defaults write com.apple.finder ShowStatusBar -bool true
 
 echo ""
-cecho "Finder: show path bar"
+echo "Finder: show path bar"
 defaults write com.apple.finder ShowPathbar -bool true
 
 echo ""
-cecho "Finder: allowing text selection in Quick Look/Preview"
+echo "Finder: allowing text selection in Quick Look/Preview"
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
 echo ""
-cecho "Displaying full POSIX path as Finder window title?"
+echo "Displaying full POSIX path as Finder window title?"
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 echo ""
-cecho "Disabling the warning when changing a file extension"
+echo "Disabling the warning when changing a file extension"
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 echo ""
-cecho "Use column view in all Finder windows by default"
+echo "Use column view in all Finder windows by default"
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
 echo ""
-cecho "Avoiding creating stupid .DS_Store files on network volumes"
+echo "Avoiding creating stupid .DS_Store files on network volumes"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 echo ""
-cecho "Disabling disk image verification"
+echo "Disabling disk image verification"
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 
 echo ""
-cecho "Enable snap-to-grid for icons on the desktop and in other icon views?"
+echo "Enable snap-to-grid for icons on the desktop and in other icon views?"
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 echo ""
-cecho "Setting Trash to empty securely by default"
+echo "Setting Trash to empty securely by default"
 defaults write com.apple.finder EmptyTrashSecurely -bool true
 
 
@@ -267,26 +264,26 @@ defaults write com.apple.finder EmptyTrashSecurely -bool true
 #defaults write com.apple.dock persistent-apps -array
 
 echo ""
-cecho "Setting the icon size of Dock items to 36 pixels for optimal size/screen-realestate"
+echo "Setting the icon size of Dock items to 36 pixels for optimal size/screen-realestate"
 defaults write com.apple.dock tilesize -int 36
 
 echo ""
-cecho "Speeding up Mission Control animations and grouping windows by application"
+echo "Speeding up Mission Control animations and grouping windows by application"
 defaults write com.apple.dock expose-animation-duration -float 0.1
 defaults write com.apple.dock "expose-group-by-app" -bool true
 
 echo ""
-cecho "Setting Dock to auto-hide and removing the auto-hiding delay"
+echo "Setting Dock to auto-hide and removing the auto-hiding delay"
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0
 
 echo ""
-cecho "Setting Dock to 2D mode"
+echo "Setting Dock to 2D mode"
 defaults write com.apple.dock no-glass -boolean YES
 
 echo ""
-cecho "Pinning the Dock to the left side of the screen for most efficient use of screen realestate"
+echo "Pinning the Dock to the left side of the screen for most efficient use of screen realestate"
 #defaults write com.apple.dock pinning -string "end"
 
 
@@ -295,29 +292,29 @@ cecho "Pinning the Dock to the left side of the screen for most efficient use of
 ###############################################################################
 
 echo ""
-cecho "Disabling Safari’s thumbnail cache for History and Top Sites"
+echo "Disabling Safari’s thumbnail cache for History and Top Sites"
 defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 
 echo ""
-cecho "Enabling Safari’s debug menu"
+echo "Enabling Safari’s debug menu"
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
 echo ""
-cecho "Making Safari’s search banners default to Contains instead of Starts With"
+echo "Making Safari’s search banners default to Contains instead of Starts With"
 defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 
 echo ""
-cecho "Removing useless icons from Safari’s bookmarks bar"
+echo "Removing useless icons from Safari’s bookmarks bar"
 defaults write com.apple.Safari ProxiesInBookmarksBar "()"
 
 echo ""
-cecho "Enabling the Develop menu and the Web Inspector in Safari"
+echo "Enabling the Develop menu and the Web Inspector in Safari"
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
 
 echo ""
-cecho "Adding a context menu item for showing the Web Inspector in web views"
+echo "Adding a context menu item for showing the Web Inspector in web views"
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 ###############################################################################
@@ -325,11 +322,11 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 ###############################################################################
 
 echo ""
-cecho "Enabling iTunes track notifications in the Dock"
+echo "Enabling iTunes track notifications in the Dock"
 defaults write com.apple.dock itunes-notifications -bool true
 
 echo ""
-cecho "Copy email addresses as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app?"
+echo "Copy email addresses as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app?"
 select yn in "Yes" "No"; do
   case $yn in
     Yes ) defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
@@ -339,7 +336,7 @@ select yn in "Yes" "No"; do
 done
 
 echo ""
-cecho "Enabling the debug menu in Disk Utility"
+echo "Enabling the debug menu in Disk Utility"
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 
 ###############################################################################
@@ -347,7 +344,7 @@ defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 ###############################################################################
 
 echo ""
-cecho "Enabling UTF-8 ONLY in Terminal.app and setting the Pro theme by default"
+echo "Enabling UTF-8 ONLY in Terminal.app and setting the Pro theme by default"
 defaults write com.apple.terminal StringEncodings -array 4
 defaults write com.apple.Terminal "Default Window Settings" -string "Pro"
 defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
@@ -357,51 +354,51 @@ defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
 ###############################################################################
 
 echo ""
-cecho "Preventing Time Machine from prompting to use new hard drives as backup volume"
+echo "Preventing Time Machine from prompting to use new hard drives as backup volume"
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 echo ""
-cecho "Disabling local Time Machine backups"
+echo "Disabling local Time Machine backups"
 hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 ###############################################################################
 # Personal Additions
 ###############################################################################
 echo ""
-cecho "Deleting space hogging sleep image and disabling"
+echo "Deleting space hogging sleep image and disabling"
 sudo rm /private/var/vm/sleepimage
 sudo pmset -a hibernatemode 0
 
 echo ""
-cecho "Speed up wake from sleep to 24 hours from an hour"
+echo "Speed up wake from sleep to 24 hours from an hour"
 # http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
 pmset -a standbydelay 86400
 
 echo ""
-cecho "Disable computer sleep and stop the display from shutting off"
+echo "Disable computer sleep and stop the display from shutting off"
 sudo pmset -a sleep 0
 sudo pmset -a displaysleep 0
 
 echo ""
-cecho "Disabling OS X logging of downloaded files"
-cecho "For more info visit http://www.macgasm.net/2013/01/18/good-morning-your-mac-keeps-a-log-of-all-your-downloads/"
+echo "Disabling OS X logging of downloaded files"
+echo "For more info visit http://www.macgasm.net/2013/01/18/good-morning-your-mac-keeps-a-log-of-all-your-downloads/"
 defaults write com.apple.LaunchServices LSQuarantine -bool NO
 
 ###############################################################################
 # Sublime Text
 ###############################################################################
 echo ""
-cecho "Do you use Sublime Text as your editor of choice and is it installed?"
+echo "Do you use Sublime Text as your editor of choice and is it installed?"
 select yn in "Yes" "No"; do
   case $yn in
     Yes ) echo ""
-        cecho "Linking Sublime Text command line"
+        echo "Linking Sublime Text command line"
         ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
         echo ""
-        cecho "Setting Git to use Sublime Text as default editor"
+        echo "Setting Git to use Sublime Text as default editor"
         git config --global core.editor "subl -n -w"
         echo ""
-        cecho "Removing Mission Control as it interferes with Sublime Text keyboard shortcut for selecting multiple lines"
+        echo "Removing Mission Control as it interferes with Sublime Text keyboard shortcut for selecting multiple lines"
         defaults write com.apple.dock mcx-expose-disabled -bool TRUE
         break;;
     No ) break;;
@@ -413,10 +410,10 @@ done
 # Git
 ###############################################################################
 echo ""
-cecho "Create a nicely formatted git log command accessible via 'git lg'?"
+echo "Create a nicely formatted git log command accessible via 'git lg'?"
 select yn in "Yes" "No"; do
   case $yn in
-    Yes ) cecho "Creating nice git log command"
+    Yes ) echo "Creating nice git log command"
         git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
         break;;
     No ) break;;
@@ -428,14 +425,14 @@ done
 ###############################################################################
 
 echo ""
-cecho "Done!"
+echo "Done!"
 echo ""
 echo ""
-cecho "###############################################################################"
+echo "###############################################################################"
 echo ""
 echo ""
-cecho "Note that some of these changes require a logout/restart to take effect."
-cecho "Killing some open applications in order to take effect."
+echo "Note that some of these changes require a logout/restart to take effect."
+echo "Killing some open applications in order to take effect."
 echo ""
 
 find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete

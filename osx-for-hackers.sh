@@ -30,10 +30,10 @@ cecho() {
 doOSXStuff() {
   echo ""
   echo "##############################################"
-  echo "  This script will make your  Mac awesome."
-  echo "   Follow the prompts and you'll be fine."
-  echo ""
-  echo "            ~ Happy Hacking! ~"
+  echo "#  This script will make your  Mac awesome."
+  echo "#   Follow the prompts and you'll be fine."
+  echo "#"
+  echo "#            ~ Happy Hacking! ~"
   echo "#############################################"
   echo ""
   ###############################################################################

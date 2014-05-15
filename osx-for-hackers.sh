@@ -18,8 +18,8 @@ cyan='\033[0;36m'
 alias Reset="tput sgr0"
 
 # Color-echo.
-# Argument $1 = message
-# Argument $2 = Color
+# arg $1 = message
+# arg $2 = Color
 cecho() {
   echo "${2}${1}"
   Reset # Reset to normal.

@@ -1,4 +1,26 @@
-#!/usr/bin/env bash
+#! /bin/sh
+
+black='\033[0;30m'
+white='\033[0;37m'
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+blue='\033[0;34m'
+magenta='\033[0;35m'
+cyan='\033[0;36m'
+
+
+alias Reset="tput sgr0"      #  Reset text attributes to normal
+                             #+ without clearing screen.
+
+# Color-echo.
+# Argument $1 = message
+# Argument $2 = Color
+cecho() {
+  echo "${2}${1}"
+  Reset # Reset to normal.
+  return
+}
 
 # Some things taken from here
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx

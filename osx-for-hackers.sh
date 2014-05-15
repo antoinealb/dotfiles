@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Some things taken from here
+# https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+
+# Set the colours you can use
 black='\033[0;30m'
 white='\033[0;37m'
 red='\033[0;31m'
@@ -10,8 +14,8 @@ magenta='\033[0;35m'
 cyan='\033[0;36m'
 
 
-alias Reset="tput sgr0"      #  Reset text attributes to normal
-                             #+ without clearing screen.
+#  Reset text attributes to normal + without clearing screen.
+alias Reset="tput sgr0"
 
 # Color-echo.
 # Argument $1 = message
@@ -22,8 +26,6 @@ cecho() {
   return
 }
 
-# Some things taken from here
-# https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 
 # Ask for the administrator password upfront
 sudo -v

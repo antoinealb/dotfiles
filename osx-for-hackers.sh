@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 black='\033[0;30m'
 white='\033[0;37m'

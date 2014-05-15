@@ -451,7 +451,8 @@ if [[ "$(uname)" == "Darwin" ]]; then
 
   doOSXStuff()
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
-  echo "(ﾉ^_^)ﾉ Thank you for using a sane platform! Unfortunately, you'll need to run this script on a  Mac."
+  echo "(ﾉ^_^)ﾉ Thank you for using a sane platform!"
+  echo "Unfortunately, you'll need to run this script on a  Mac."
 else
   cecho "Y U NO USE MAC?" $red
   echo "(╯°□°)╯︵ ┻━┻"

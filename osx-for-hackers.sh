@@ -21,7 +21,7 @@ echo "## Happy Hacking!"
 echo "#####################################"
 echo ""
 ###############################################################################
-# General UI/UX                                 #
+# General UI/UX
 ###############################################################################
 
 echo ""
@@ -85,7 +85,7 @@ echo "Check for software updates daily, not just once per week"
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 ###############################################################################
-# Trackpad, mouse, keyboard, Bluetooth accessories, and input         #
+# Trackpad, mouse, keyboard, Bluetooth accessories, and input
 ###############################################################################
 
 echo ""
@@ -159,7 +159,7 @@ echo "Enabling subpixel font rendering on non-Apple LCDs"
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 ###############################################################################
-# Finder                                    #
+# Finder
 ###############################################################################
 
 echo ""
@@ -269,7 +269,7 @@ echo "Pinning the Dock to the left side of the screen for most efficient use of 
 
 
 ###############################################################################
-# Safari & WebKit                               #
+# Safari & WebKit
 ###############################################################################
 
 echo ""
@@ -299,7 +299,7 @@ echo "Adding a context menu item for showing the Web Inspector in web views"
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 ###############################################################################
-# Address Book and iTunes                           #
+# Address Book and iTunes
 ###############################################################################
 
 echo ""
@@ -321,7 +321,7 @@ echo "Enabling the debug menu in Disk Utility"
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 
 ###############################################################################
-# Terminal                                  #
+# Terminal
 ###############################################################################
 
 echo ""
@@ -331,7 +331,7 @@ defaults write com.apple.Terminal "Default Window Settings" -string "Pro"
 defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
 
 ###############################################################################
-# Time Machine                                #
+# Time Machine
 ###############################################################################
 
 echo ""
@@ -343,7 +343,7 @@ echo "Disabling local Time Machine backups"
 hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 ###############################################################################
-# Personal Additions                              #
+# Personal Additions
 ###############################################################################
 echo ""
 echo "Deleting space hogging sleep image and disabling"
@@ -366,7 +366,7 @@ echo "For more info visit http://www.macgasm.net/2013/01/18/good-morning-your-ma
 defaults write com.apple.LaunchServices LSQuarantine -bool NO
 
 ###############################################################################
-# Sublime Text                                #
+# Sublime Text
 ###############################################################################
 echo ""
 echo "Do you use Sublime Text as your editor of choice and is it installed?"
@@ -388,7 +388,7 @@ done
 
 
 ###############################################################################
-# Git                                     #
+# Git
 ###############################################################################
 echo ""
 echo "Create a nicely formatted git log command accessible via 'git lg'?"
@@ -402,7 +402,7 @@ select yn in "Yes" "No"; do
 done
 
 ###############################################################################
-# Kill affected applications                          #
+# Kill affected applications
 ###############################################################################
 
 echo ""

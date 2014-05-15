@@ -356,7 +356,7 @@ echo "Speed up wake from sleep to 24 hours from an hour"
 pmset -a standbydelay 86400
 
 echo ""
-echo "Disable computer sleep and stop the display from sleeping"
+echo "Disable computer sleep and stop the display from shutting off"
 sudo pmset -a sleep 0
 sudo pmset -a displaysleep 0
 

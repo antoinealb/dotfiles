@@ -374,10 +374,10 @@ doOSXStuff() {
   defaults write com.apple.LaunchServices LSQuarantine -bool NO
 
   ###############################################################################
-  # Sublime Text - Needs to be ST3
+  # Sublime Text
   ###############################################################################
   echo ""
-  echo "Do you use Sublime Text as your editor of choice and is it installed?"
+  echo "Do you use Sublime Text 3 as your editor of choice and is it installed?"
   select yn in "Yes" "No"; do
     case $yn in
       Yes ) echo ""

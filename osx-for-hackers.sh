@@ -366,17 +366,17 @@ echo "For more info visit http://www.macgasm.net/2013/01/18/good-morning-your-ma
 defaults write com.apple.LaunchServices LSQuarantine -bool NO
 
 ###############################################################################
-# Sublime Text 2                                                              #
+# Sublime Text                                                                #
 ###############################################################################
 echo ""
 echo "Do you use Sublime Text as your editor of choice and is it installed?"
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) echo ""
-              echo "Linking Sublime Text 2 command line"
-              ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /bin/subl
+              echo "Linking Sublime Text command line"
+              ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
               echo ""
-              echo "Setting Git to use Sublime Text 2 as default editor"
+              echo "Setting Git to use Sublime Text as default editor"
               git config --global core.editor "subl -n -w"
               echo ""
               echo "Removing Mission Control as it interferes with Sublime Text keyboard shortcut for selecting multiple lines"

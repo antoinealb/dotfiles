@@ -26,6 +26,14 @@ cecho() {
   return
 }
 
+# Check platform
+if [ "$(uname)" == "Darwin" ]; then
+    # Do something under Mac OS X platform
+else
+  cecho "Y U NO USE MAC?" $red
+  echo "(╯°□°)╯︵ ┻━┻"
+fi
+
 
 # Ask for the administrator password upfront
 sudo -v

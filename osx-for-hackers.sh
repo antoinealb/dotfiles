@@ -21,7 +21,7 @@ echo "## Happy Hacking!"
 echo "#####################################"
 echo ""
 ###############################################################################
-# General UI/UX                                                               #
+# General UI/UX                                 #
 ###############################################################################
 
 echo ""
@@ -85,7 +85,7 @@ echo "Check for software updates daily, not just once per week"
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 ###############################################################################
-# Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
+# Trackpad, mouse, keyboard, Bluetooth accessories, and input         #
 ###############################################################################
 
 echo ""
@@ -110,7 +110,7 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 echo ""
 echo "Setting trackpad & mouse speed to a reasonable number"
-defaults write -g com.apple.trackpad.sca    ng 2
+defaults write -g com.apple.trackpad.sca  ng 2
 defaults write -g com.apple.mouse.scaling 2.5
 
 echo ""
@@ -118,7 +118,7 @@ echo "Turn off keyboard illumination when computer is not used for 5 minutes"
 defaults write com.apple.BezelServices kDimTime -int 300
 
 ###############################################################################
-# Screen                                                                      #
+# Screen
 ###############################################################################
 
 echo ""
@@ -131,13 +131,13 @@ echo "Where do you want screenshots to be stored? (hit ENTER if you want ~/Deskt
 read screenshot_location
 if [ -z "$1" ]
 then
-    echo ""
-    echo "Setting location to ~/Desktop"
-    defaults write com.apple.screencapture location -string "$HOME/Desktop"
+  echo ""
+  echo "Setting location to ~/Desktop"
+  defaults write com.apple.screencapture location -string "$HOME/Desktop"
 else
-    echo ""
-    echo "Setting location to ~/$screenshot_location"
-    defaults write com.apple.screencapture location -string "$HOME/$screenshot_location"
+  echo ""
+  echo "Setting location to ~/$screenshot_location"
+  defaults write com.apple.screencapture location -string "$HOME/$screenshot_location"
 fi
 
 echo ""
@@ -145,13 +145,13 @@ echo "What format should screenshots be saved as? (hit ENTER for PNG, options: B
 read screenshot_format
 if [ -z "$1" ]
 then
-    echo ""
-    echo "Setting screenshot format to PNG"
-    defaults write com.apple.screencapture type -string "png"
+  echo ""
+  echo "Setting screenshot format to PNG"
+  defaults write com.apple.screencapture type -string "png"
 else
-    echo ""
-    echo "Setting screenshot format to $screenshot_format"
-    defaults write com.apple.screencapture type -string "$screenshot_format"
+  echo ""
+  echo "Setting screenshot format to $screenshot_format"
+  defaults write com.apple.screencapture type -string "$screenshot_format"
 fi
 
 
@@ -159,7 +159,7 @@ echo "Enabling subpixel font rendering on non-Apple LCDs"
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 ###############################################################################
-# Finder                                                                      #
+# Finder                                    #
 ###############################################################################
 
 echo ""
@@ -169,21 +169,21 @@ defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 echo ""
 echo "Finder: show hidden files by default?"
 select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) defaults write com.apple.Finder AppleShowAllFiles -bool true
-              break;;
-        No ) break;;
-    esac
+  case $yn in
+    Yes ) defaults write com.apple.Finder AppleShowAllFiles -bool true
+        break;;
+    No ) break;;
+  esac
 done
 
 echo ""
 echo "Finder: show dotfiles?"
 select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) defaults write com.apple.finder AppleShowAllFiles TRUE
-              break;;
-        No ) break;;
-    esac
+  case $yn in
+    Yes ) defaults write com.apple.finder AppleShowAllFiles TRUE
+        break;;
+    No ) break;;
+  esac
 done
 
 echo ""
@@ -269,7 +269,7 @@ echo "Pinning the Dock to the left side of the screen for most efficient use of 
 
 
 ###############################################################################
-# Safari & WebKit                                                             #
+# Safari & WebKit                               #
 ###############################################################################
 
 echo ""
@@ -299,7 +299,7 @@ echo "Adding a context menu item for showing the Web Inspector in web views"
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 ###############################################################################
-# Address Book and iTunes                                                     #
+# Address Book and iTunes                           #
 ###############################################################################
 
 echo ""
@@ -309,11 +309,11 @@ defaults write com.apple.dock itunes-notifications -bool true
 echo ""
 echo "Copy email addresses as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app?"
 select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-              break;;
-        No ) break;;
-    esac
+  case $yn in
+    Yes ) defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+        break;;
+    No ) break;;
+  esac
 done
 
 echo ""
@@ -321,7 +321,7 @@ echo "Enabling the debug menu in Disk Utility"
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 
 ###############################################################################
-# Terminal                                                                    #
+# Terminal                                  #
 ###############################################################################
 
 echo ""
@@ -331,7 +331,7 @@ defaults write com.apple.Terminal "Default Window Settings" -string "Pro"
 defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
 
 ###############################################################################
-# Time Machine                                                                #
+# Time Machine                                #
 ###############################################################################
 
 echo ""
@@ -343,7 +343,7 @@ echo "Disabling local Time Machine backups"
 hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 ###############################################################################
-# Personal Additions                                                          #
+# Personal Additions                              #
 ###############################################################################
 echo ""
 echo "Deleting space hogging sleep image and disabling"
@@ -366,43 +366,43 @@ echo "For more info visit http://www.macgasm.net/2013/01/18/good-morning-your-ma
 defaults write com.apple.LaunchServices LSQuarantine -bool NO
 
 ###############################################################################
-# Sublime Text                                                                #
+# Sublime Text                                #
 ###############################################################################
 echo ""
 echo "Do you use Sublime Text as your editor of choice and is it installed?"
 select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) echo ""
-              echo "Linking Sublime Text command line"
-              ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-              echo ""
-              echo "Setting Git to use Sublime Text as default editor"
-              git config --global core.editor "subl -n -w"
-              echo ""
-              echo "Removing Mission Control as it interferes with Sublime Text keyboard shortcut for selecting multiple lines"
-              defaults write com.apple.dock mcx-expose-disabled -bool TRUE
-              break;;
-        No ) break;;
-    esac
+  case $yn in
+    Yes ) echo ""
+        echo "Linking Sublime Text command line"
+        ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+        echo ""
+        echo "Setting Git to use Sublime Text as default editor"
+        git config --global core.editor "subl -n -w"
+        echo ""
+        echo "Removing Mission Control as it interferes with Sublime Text keyboard shortcut for selecting multiple lines"
+        defaults write com.apple.dock mcx-expose-disabled -bool TRUE
+        break;;
+    No ) break;;
+  esac
 done
 
 
 ###############################################################################
-# Git                                                                         #
+# Git                                     #
 ###############################################################################
 echo ""
 echo "Create a nicely formatted git log command accessible via 'git lg'?"
 select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) echo "Creating nice git log command"
-              git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
-              break;;
-        No ) break;;
-    esac
+  case $yn in
+    Yes ) echo "Creating nice git log command"
+        git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+        break;;
+    No ) break;;
+  esac
 done
 
 ###############################################################################
-# Kill affected applications                                                  #
+# Kill affected applications                          #
 ###############################################################################
 
 echo ""
@@ -418,5 +418,5 @@ echo ""
 
 find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
 for app in Finder Dock Mail Safari iTunes iCal Address\ Book SystemUIServer; do
-    killall "$app" > /dev/null 2>&1
+  killall "$app" > /dev/null 2>&1
 done

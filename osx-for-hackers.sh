@@ -356,6 +356,11 @@ echo "Speed up wake from sleep to 24 hours from an hour"
 pmset -a standbydelay 86400
 
 echo ""
+echo "Disable computer sleep and stop the display from sleeping"
+sudo pmset -a sleep 0
+sudo pmset -a displaysleep 0
+
+echo ""
 echo "Disabling OS X logging of downloaded files"
 echo "For more info visit http://www.macgasm.net/2013/01/18/good-morning-your-mac-keeps-a-log-of-all-your-downloads/"
 defaults write com.apple.LaunchServices LSQuarantine -bool NO

@@ -220,7 +220,8 @@ doOSXStuff() {
 
   echo ""
   echo "Use column view in all Finder windows by default"
-  defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+  # defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+  defaults write com.apple.finder FXPreferredViewStyle Clmv
 
   echo ""
   echo "Avoiding creating stupid .DS_Store files on network volumes"

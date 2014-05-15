@@ -448,7 +448,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Check platform
 if [[ "$(uname)" == "Darwin" ]]; then
-  # run everything else
+  doOSXStuff()
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   echo "(ﾉ^_^)ﾉ Thank you for using a sane platform! Unfortunately, you'll need to run this script on a  Mac"
 else

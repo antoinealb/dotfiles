@@ -28,7 +28,7 @@ cecho() {
 
 # Check platform
 if [[ "$(uname)" == "Darwin" ]]; then
-    # Do something under Mac OS X platform
+  # Do something under Mac OS X platform
 else
   cecho "Y U NO USE MAC?" $red
   echo "(╯°□°)╯︵ ┻━┻"

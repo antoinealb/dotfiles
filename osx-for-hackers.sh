@@ -306,6 +306,7 @@ doOSXStuff() {
   echo "Adding a context menu item for showing the Web Inspector in web views"
   defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
+
   ###############################################################################
   # Address Book and iTunes
   ###############################################################################
@@ -315,18 +316,13 @@ doOSXStuff() {
   defaults write com.apple.dock itunes-notifications -bool true
 
   echo ""
-  echo "Copy email addresses as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app?"
-  select yn in "Yes" "No"; do
-    case $yn in
-      Yes ) defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-          break;;
-      No ) break;;
-    esac
-  done
+  echo "Set email addresses top copy as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app?"
+  defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
   echo ""
   echo "Enabling the debug menu in Disk Utility"
   defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+
 
   ###############################################################################
   # Terminal
@@ -337,6 +333,7 @@ doOSXStuff() {
   defaults write com.apple.terminal StringEncodings -array 4
   defaults write com.apple.Terminal "Default Window Settings" -string "Pro"
   defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
+
 
   ###############################################################################
   # Time Machine
@@ -349,6 +346,7 @@ doOSXStuff() {
   echo ""
   echo "Disabling local Time Machine backups"
   hash tmutil &> /dev/null && sudo tmutil disablelocal
+
 
   ###############################################################################
   # Personal Additions
@@ -372,6 +370,7 @@ doOSXStuff() {
   echo "Disabling OS X logging of downloaded files"
   echo "For more info visit http://www.macgasm.net/2013/01/18/good-morning-your-mac-keeps-a-log-of-all-your-downloads/"
   defaults write com.apple.LaunchServices LSQuarantine -bool NO
+
 
   ###############################################################################
   # Sublime Text

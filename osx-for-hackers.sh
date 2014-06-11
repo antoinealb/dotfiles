@@ -126,7 +126,7 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 echo ""
 echo "Setting trackpad & mouse speed to a reasonable number"
-defaults write -g com.apple.trackpad.sca  ng 2
+defaults write -g com.apple.trackpad.scaling 2
 defaults write -g com.apple.mouse.scaling 2.5
 
 echo ""
@@ -362,8 +362,7 @@ hash tmutil &> /dev/null && sudo tmutil disablelocal
 ###############################################################################
 echo ""
 echo "Deleting space hogging sleep image and disabling"
-sudo rm /private/var/vm/sleepimage
-sudo pmset -a hibernatemode 0
+sudo rm /private/var/vm/sleepimage && sudo pmset -a hibernatemode 0
 
 echo ""
 echo "Speed up wake from sleep to 24 hours from an hour"

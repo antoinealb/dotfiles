@@ -1,0 +1,12 @@
+[user]
+	name = Antoine Albertelli
+	email = antoinea101@gmail.com
+[color]
+	status = auto
+	branch = auto
+	ui = true
+[core]
+	editor = vim
+	autocrlf = input
+[push]
+	default = matching

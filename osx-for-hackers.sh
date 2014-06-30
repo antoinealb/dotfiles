@@ -26,12 +26,18 @@ cecho() {
   return
 }
 
+# Ask for the administrator password upfront
+sudo -v
+ 
+# Keep-alive: update existing `sudo` time stamp until script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 echo ""
 echo "##############################################"
 echo "#  This script will make your  Mac awesome."
 echo "#   Follow the prompts and you'll be fine."
 echo "#"
-echo "#            ~ Happy Hacking! ~"
+echo "#            ~ Happy Hacking ~"
 echo "#############################################"
 echo ""
 
@@ -50,7 +56,7 @@ sudo scutil --set LocalHostName $COMPUTER_NAME
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
 
 echo ""
-echo "Hiding the useless menubar icons?"
+echo "Hiding the useless menubar icons"
 defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
 sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 
@@ -58,6 +64,8 @@ echo ""
 echo "Disabling OS X Gate Keeper"
 echo "(You'll be able to install any app you want from here on, not just Mac App Store apps)"
 sudo spctl --master-disable
+sudo defaults write /var/db/SystemPolicy-prefs.plist enabled -string no
+defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 echo ""
 echo "Increasing the window resize speed for Cocoa applications whether you like it or not"
@@ -66,10 +74,6 @@ defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 echo ""
 echo "Expanding the save panel by default"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-
-echo ""
-echo "Disabling the 'Are you sure you want to open this application from the Internet?' dialog"
-defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 echo ""
@@ -183,7 +187,7 @@ echo "Showing icons for hard drives, servers, and removable media on the desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 
 echo ""
-echo "Finder: show hidden files by default?"
+echo "Show hidden files in Finder by default?"
 select yn in "Yes" "No"; do
   case $yn in
     Yes ) defaults write com.apple.Finder AppleShowAllFiles -bool true
@@ -193,7 +197,7 @@ select yn in "Yes" "No"; do
 done
 
 echo ""
-echo "Finder: show dotfiles?"
+echo "Show dotfiles in Finder by default?"
 select yn in "Yes" "No"; do
   case $yn in
     Yes ) defaults write com.apple.finder AppleShowAllFiles TRUE
@@ -203,23 +207,19 @@ select yn in "Yes" "No"; do
 done
 
 echo ""
-echo "Finder: showing all filename extensions"
+echo "Showing all filename extensions in Finder by default"
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 echo ""
-echo "Finder: showing status bar"
+echo "Showing status bar in Finder by default"
 defaults write com.apple.finder ShowStatusBar -bool true
 
 echo ""
-echo "Finder: show path bar"
-defaults write com.apple.finder ShowPathbar -bool true
-
-echo ""
-echo "Finder: allowing text selection in Quick Look/Preview"
+echo "Allowing text selection in Quick Look/Preview in Finder by default"
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
 echo ""
-echo "Displaying full POSIX path as Finder window title?"
+echo "Displaying full POSIX path as Finder window title"
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 echo ""
@@ -228,11 +228,10 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 echo ""
 echo "Use column view in all Finder windows by default"
-# defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 defaults write com.apple.finder FXPreferredViewStyle Clmv
 
 echo ""
-echo "Avoiding creating stupid .DS_Store files on network volumes"
+echo "Avoiding the creation of .DS_Store files on network volumes"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 echo ""
@@ -242,14 +241,10 @@ defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 
 echo ""
-echo "Enable snap-to-grid for icons on the desktop and in other icon views?"
+echo "Enabling snap-to-grid for icons on the desktop and in other icon views"
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-
-echo ""
-echo "Setting Trash to empty securely by default"
-defaults write com.apple.finder EmptyTrashSecurely -bool true
 
 
 ###############################################################################
@@ -275,14 +270,6 @@ echo "Setting Dock to auto-hide and removing the auto-hiding delay"
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0
-
-echo ""
-echo "Setting Dock to 2D mode"
-defaults write com.apple.dock no-glass -boolean YES
-
-echo ""
-echo "Pinning the Dock to the left side of the screen for most efficient use of screen realestate"
-#defaults write com.apple.dock pinning -string "end"
 
 
 ###############################################################################
@@ -317,20 +304,12 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 
 ###############################################################################
-# Address Book and iTunes
+# Mail
 ###############################################################################
 
 echo ""
-echo "Enabling iTunes track notifications in the Dock"
-defaults write com.apple.dock itunes-notifications -bool true
-
-echo ""
-echo "Set email addresses top copy as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app?"
+echo "Setting email addresses to copy as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app"
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-
-echo ""
-echo "Enabling the debug menu in Disk Utility"
-defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 
 
 ###############################################################################
@@ -362,22 +341,18 @@ hash tmutil &> /dev/null && sudo tmutil disablelocal
 ###############################################################################
 echo ""
 echo "Deleting space hogging sleep image and disabling"
-sudo rm /private/var/vm/sleepimage && sudo pmset -a hibernatemode 0
+sudo rm /private/var/vm/sleepimage
+sudo pmset -a hibernatemode 0
 
 echo ""
-echo "Speed up wake from sleep to 24 hours from an hour"
+echo "Speeding up wake from sleep to 24 hours from an hour"
 # http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
-pmset -a standbydelay 86400
+sudo pmset -a standbydelay 86400
 
 echo ""
 echo "Disable computer sleep and stop the display from shutting off"
 sudo pmset -a sleep 0
 sudo pmset -a displaysleep 0
-
-echo ""
-echo "Disabling OS X logging of downloaded files"
-echo "For more info visit http://www.macgasm.net/2013/01/18/good-morning-your-mac-keeps-a-log-of-all-your-downloads/"
-defaults write com.apple.LaunchServices LSQuarantine -bool NO
 
 
 ###############################################################################
@@ -410,8 +385,8 @@ echo "Create a nicely formatted git log command accessible via 'git lg'?"
 select yn in "Yes" "No"; do
   case $yn in
     Yes ) echo "Creating nice git log command"
-        git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
-        break;;
+          git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+          break;;
     No ) break;;
   esac
 done

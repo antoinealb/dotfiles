@@ -339,10 +339,22 @@ hash tmutil &> /dev/null && sudo tmutil disablelocal
 ###############################################################################
 # Personal Additions
 ###############################################################################
+
 echo ""
-echo "Deleting space hogging sleep image and disabling"
-sudo rm /private/var/vm/sleepimage
+echo "Disable hibernation (speeds up entering sleep mode)"
 sudo pmset -a hibernatemode 0
+
+echo ""
+echo "Remove the sleep image file to save disk space"
+sudo rm /Private/var/vm/sleepimage
+echo "Creating a zero-byte file instead…"
+sudo touch /Private/var/vm/sleepimage
+echo "…and make sure it can’t be rewritten"
+sudo chflags uchg /Private/var/vm/sleepimage
+
+echo ""
+echo "Disable the sudden motion sensor as it’s not useful for SSDs"
+sudo pmset -a sms 0
 
 echo ""
 echo "Speeding up wake from sleep to 24 hours from an hour"

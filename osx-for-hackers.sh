@@ -366,6 +366,10 @@ echo "Disable computer sleep and stop the display from shutting off"
 sudo pmset -a sleep 0
 sudo pmset -a displaysleep 0
 
+echo ""
+echo "Disable annoying backswipe in Chrome"
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+
 
 ###############################################################################
 # Sublime Text

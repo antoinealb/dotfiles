@@ -33,12 +33,12 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 echo ""
-echo "##############################################"
-echo "#  This script will make your  Mac awesome."
-echo "#   Follow the prompts and you'll be fine."
-echo "#"
-echo "#            ~ Happy Hacking ~"
-echo "#############################################"
+cecho "##############################################" $white
+cecho "#  This script will make your  Mac awesome." $white
+cecho "#   Follow the prompts and you'll be fine." $white
+cecho "#" $white
+cecho "#            ~ Happy Hacking ~" $white
+cecho "#############################################" $white
 echo ""
 
 
@@ -56,8 +56,19 @@ sudo scutil --set LocalHostName $COMPUTER_NAME
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
 
 echo ""
-echo "Hiding the useless menubar icons"
-defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
+echo "Hide the Time Machine, Volume, User, and Bluetooth icons"
+for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
+  defaults write "${domain}" dontAutoLoad -array \
+    "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+    "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+    "/System/Library/CoreServices/Menu Extras/User.menu"
+done
+defaults write com.apple.systemuiserver menuExtras -array \
+  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+  "/System/Library/CoreServices/Menu Extras/Clock.menu"
+
 sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 
 echo ""
@@ -68,12 +79,18 @@ sudo defaults write /var/db/SystemPolicy-prefs.plist enabled -string no
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 echo ""
-echo "Increasing the window resize speed for Cocoa applications whether you like it or not"
+echo "Increasing the window resize speed for Cocoa applications"
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 echo ""
 echo "Expanding the save panel by default"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+echo ""
+echo "Automatically quit printer app once the print jobs complete"
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 echo ""
@@ -104,6 +121,16 @@ echo ""
 echo "Check for software updates daily, not just once per week"
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
+echo ""
+echo "Remove duplicates in the “Open With” menu"
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+
+echo ""
+echo "Disable smart quotes and smart dashes as they’re annoying when typing code"
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input
 ###############################################################################
@@ -117,7 +144,7 @@ echo "Enabling full keyboard access for all controls (e.g. enable Tab in modal d
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 echo ""
-echo "Disabling press-and-hold for keys in favor of key repeat "
+echo "Disabling press-and-hold for keys in favor of a key repeat"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 echo ""
@@ -175,8 +202,13 @@ else
 fi
 
 
+echo ""
 echo "Enabling subpixel font rendering on non-Apple LCDs"
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+echo ""
+echo "Enable HiDPI display modes (requires restart)"
+sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 ###############################################################################
 # Finder
@@ -277,6 +309,14 @@ defaults write com.apple.dock autohide-time-modifier -float 0
 ###############################################################################
 
 echo ""
+echo "Hiding Safari’s bookmarks bar by default"
+defaults write com.apple.Safari ShowFavoritesBar -bool false
+
+echo ""
+echo "Hiding Safari’s sidebar in Top Sites"
+defaults write com.apple.Safari ShowSidebarInTopSites -bool false
+
+echo ""
 echo "Disabling Safari’s thumbnail cache for History and Top Sites"
 defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 
@@ -291,6 +331,10 @@ defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 echo ""
 echo "Removing useless icons from Safari’s bookmarks bar"
 defaults write com.apple.Safari ProxiesInBookmarksBar "()"
+
+echo ""
+echo "Allow hitting the Backspace key to go to the previous page in history"
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
 
 echo ""
 echo "Enabling the Develop menu and the Web Inspector in Safari"
@@ -334,6 +378,49 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 echo ""
 echo "Disabling local Time Machine backups"
 hash tmutil &> /dev/null && sudo tmutil disablelocal
+
+
+###############################################################################
+# Messages                                                                    #
+###############################################################################
+
+echo ""
+echo "Disable automatic emoji substitution (i.e. use plain text smileys)"
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
+
+echo ""
+echo "Disable smart quotes as it’s annoying for messages that contain code"
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
+
+echo ""
+echo "Disable continuous spell checking"
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
+
+
+###############################################################################
+# Transmission.app                                                            #
+###############################################################################
+
+echo ""
+echo "Use `~/Downloads/Incomplete` to store incomplete downloads"
+defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
+defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Downloads/Incomplete"
+
+echo ""
+echo "Don’t prompt for confirmation before downloading"
+defaults write org.m0k.transmission DownloadAsk -bool false
+
+echo ""
+echo "Trash original torrent files"
+defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
+
+echo ""
+echo "Hide the donate message"
+defaults write org.m0k.transmission WarningDonate -bool false
+
+echo ""
+echo "Hide the legal disclaimer"
+defaults write org.m0k.transmission WarningLegal -bool false
 
 
 ###############################################################################
@@ -394,42 +481,23 @@ done
 
 
 ###############################################################################
-# Git
-###############################################################################
-echo ""
-echo "Create a nicely formatted git log command accessible via 'git lg'?"
-select yn in "Yes" "No"; do
-  case $yn in
-    Yes ) echo "Creating nice git log command"
-          git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
-          break;;
-    No ) break;;
-  esac
-done
-
-###############################################################################
 # Kill affected applications
 ###############################################################################
 
 echo ""
-echo "Done!"
+cecho "Done!" $white
 echo ""
 echo ""
-echo "###############################################################################"
+cecho "###############################################################################" $white
 echo ""
 echo ""
-echo "Note that some of these changes require a logout/restart to take effect."
-echo "Killing some open applications in order to take effect."
+cecho "Note that some of these changes require a logout/restart to take effect." $white
+cecho "Killing some open applications in order to take effect." $white
 echo ""
 
 find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
-for app in Finder Dock Mail Safari iTunes iCal Address\ Book SystemUIServer; do
-  killall "$app" > /dev/null 2>&1
+for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
+  "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
+  "Terminal" "Transmission"; do
+  killall "${app}" > /dev/null 2>&1
 done
-
-
-# Ask for the administrator password upfront
-sudo -v
-
-# Keep-alive: update existing `sudo` time stamp until script has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &

@@ -11,7 +11,6 @@ alias df="df -h"
 alias diff="colordiff -Naur"
 alias mkdir="mkdir --parents --verbose"
 alias make="make -j6"
-alias python=ipython
 
 # Set chromium as the browser for the help
 set -x BROWSER chromium

@@ -45,6 +45,13 @@ function h
     end
 end
 
+function opcode
+    echo $argv > _tmp.S
+    nasm _tmp.S -o _tmp.o
+    ndisasm _tmp.o
+    rm -rf _tmp.{S,o}
+end
+
 function card
     tutor card $argv --format json | python2 -mjson.tool
 end

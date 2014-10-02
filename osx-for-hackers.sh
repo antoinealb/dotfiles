@@ -34,7 +34,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 echo ""
 cecho "##############################################" $white
-cecho "#  This script will make your  Mac awesome." $white
+cecho "#  This script will make your ï£¿ Mac awesome." $white
 cecho "#   Follow the prompts and you'll be fine." $white
 cecho "#" $white
 cecho "#            ~ Happy Hacking ~" $white
@@ -47,7 +47,7 @@ echo ""
 ###############################################################################
 
 echo ""
-echo "Setting your computer name (as done via System Preferences → Sharing)"
+echo "Setting your computer name (as done via System Preferences â†’ Sharing)"
 echo "What would you like it to be?"
 read COMPUTER_NAME
 sudo scutil --set ComputerName $COMPUTER_NAME
@@ -56,7 +56,7 @@ sudo scutil --set LocalHostName $COMPUTER_NAME
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
 
 echo ""
-echo "Hide the Time Machine, Volume, User, and Bluetooth icons"
+echo "Hiding the Time Machine, Volume, User, and Bluetooth icons"
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
   defaults write "${domain}" dontAutoLoad -array \
     "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
@@ -69,7 +69,15 @@ defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/Battery.menu" \
   "/System/Library/CoreServices/Menu Extras/Clock.menu"
 
-sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+echo ""
+echo "Hide the Spotlight icon?"
+select yn in "Yes" "No"; do
+  case $yn in
+    Yes ) sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+        break;;
+    No ) break;;
+  esac
+done
 
 echo ""
 echo "Disabling OS X Gate Keeper"
@@ -122,11 +130,11 @@ echo "Check for software updates daily, not just once per week"
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 echo ""
-echo "Remove duplicates in the “Open With” menu"
+echo "Remove duplicates in the â€œOpen Withâ€ menu"
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
 
 echo ""
-echo "Disable smart quotes and smart dashes as they’re annoying when typing code"
+echo "Disable smart quotes and smart dashes as they're annoying when typing code"
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
@@ -207,7 +215,7 @@ echo "Enabling subpixel font rendering on non-Apple LCDs"
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 echo ""
-echo "Enable HiDPI display modes (requires restart)"
+echo "Enabling HiDPI display modes (requires restart)"
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 ###############################################################################
@@ -284,7 +292,7 @@ echo "Enabling snap-to-grid for icons on the desktop and in other icon views"
 ###############################################################################
 
 # Wipe all (default) app icons from the Dock
-# This is only really useful when setting up a new Mac, or if you don’t use
+# This is only really useful when setting up a new Mac, or if you don't use
 # the Dock to launch apps.
 #defaults write com.apple.dock persistent-apps -array
 
@@ -309,27 +317,27 @@ defaults write com.apple.dock autohide-time-modifier -float 0
 ###############################################################################
 
 echo ""
-echo "Hiding Safari’s bookmarks bar by default"
+echo "Hiding Safari's bookmarks bar by default"
 defaults write com.apple.Safari ShowFavoritesBar -bool false
 
 echo ""
-echo "Hiding Safari’s sidebar in Top Sites"
+echo "Hiding Safari's sidebar in Top Sites"
 defaults write com.apple.Safari ShowSidebarInTopSites -bool false
 
 echo ""
-echo "Disabling Safari’s thumbnail cache for History and Top Sites"
+echo "Disabling Safari's thumbnail cache for History and Top Sites"
 defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 
 echo ""
-echo "Enabling Safari’s debug menu"
+echo "Enabling Safari's debug menu"
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
 echo ""
-echo "Making Safari’s search banners default to Contains instead of Starts With"
+echo "Making Safari's search banners default to Contains instead of Starts With"
 defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 
 echo ""
-echo "Removing useless icons from Safari’s bookmarks bar"
+echo "Removing useless icons from Safari's bookmarks bar"
 defaults write com.apple.Safari ProxiesInBookmarksBar "()"
 
 echo ""
@@ -389,7 +397,7 @@ echo "Disable automatic emoji substitution (i.e. use plain text smileys)"
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
 
 echo ""
-echo "Disable smart quotes as it’s annoying for messages that contain code"
+echo "Disable smart quotes as it's annoying for messages that contain code"
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
 
 echo ""
@@ -407,7 +415,7 @@ defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
 defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Downloads/Incomplete"
 
 echo ""
-echo "Don’t prompt for confirmation before downloading"
+echo "Don't prompt for confirmation before downloading"
 defaults write org.m0k.transmission DownloadAsk -bool false
 
 echo ""
@@ -434,24 +442,19 @@ sudo pmset -a hibernatemode 0
 echo ""
 echo "Remove the sleep image file to save disk space"
 sudo rm /Private/var/vm/sleepimage
-echo "Creating a zero-byte file instead…"
+echo "creating a zero-byte file instead"
 sudo touch /Private/var/vm/sleepimage
-echo "…and make sure it can’t be rewritten"
+echo "and make sure it can't be rewritten"
 sudo chflags uchg /Private/var/vm/sleepimage
 
 echo ""
-echo "Disable the sudden motion sensor as it’s not useful for SSDs"
+echo "Disable the sudden motion sensor as it's not useful for SSDs"
 sudo pmset -a sms 0
 
 echo ""
 echo "Speeding up wake from sleep to 24 hours from an hour"
 # http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
 sudo pmset -a standbydelay 86400
-
-echo ""
-echo "Disable computer sleep and stop the display from shutting off"
-sudo pmset -a sleep 0
-sudo pmset -a displaysleep 0
 
 echo ""
 echo "Disable annoying backswipe in Chrome"

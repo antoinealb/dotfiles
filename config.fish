@@ -61,9 +61,8 @@ set -X PROJECT_HOME=~/code/web/mtg_inventory/
 sh /usr/local/bin/virtualenvwrapper.sh
 
 # github go
-
 function ghg;
-    xdg-open "https://github.com/$argv"
+    ~/dotfiles/ghg.py $argv
 end;
 
 set PATH /opt/microchip/xc16/v1.21/bin/ $PATH

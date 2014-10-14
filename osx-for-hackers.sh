@@ -33,12 +33,10 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 echo ""
-cecho "##############################################" $white
-cecho "#  This script will make your ï£¿ Mac awesome." $white
-cecho "#   Follow the prompts and you'll be fine." $white
-cecho "#" $white
-cecho "#            ~ Happy Hacking ~" $white
-cecho "#############################################" $white
+cecho "##############################################" $red
+cecho "#   CAUTION: DO NOT BLINDLY RUN THIS SCRIPT" $red
+cecho "#      YOU WILL PROBABLY REGRET IT..." $red
+cecho "#############################################" $red
 echo ""
 
 

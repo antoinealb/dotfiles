@@ -109,7 +109,6 @@ else
     *) break;;
   esac
 
-
   echo ""
   echo "Increasing the window resize speed for Cocoa applications"
   defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
@@ -158,6 +157,17 @@ else
     [yY])
       defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
       defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+      break;;
+    *) break;;
+  esac
+
+  echo ""
+  echo "Add ability to toggle between Light and Dark mode in Yosemite using ctrl+opt+cmd+t? (y/n)"
+  # http://www.reddit.com/r/apple/comments/2jr6s2/1010_i_found_a_way_to_dynamically_switch_between/
+  read -r response
+  case $response in
+    [yY])
+      sudo defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true
       break;;
     *) break;;
   esac

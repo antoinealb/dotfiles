@@ -391,6 +391,7 @@ else
 
   echo ""
   echo "Display full POSIX path as Finder window title? (y/n)"
+  read -r response
   case $response in
     [yY])
       defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
@@ -400,6 +401,7 @@ else
 
   echo ""
   echo "Disable the warning when changing a file extension? (y/n)"
+  read -r response
   case $response in
     [yY])
       defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
@@ -409,6 +411,7 @@ else
 
   echo ""
   echo "Use column view in all Finder windows by default? (y/n)"
+  read -r response
   case $response in
     [yY])
       defaults write com.apple.finder FXPreferredViewStyle Clmv
@@ -418,6 +421,7 @@ else
 
   echo ""
   echo "Avoid creation of .DS_Store files on network volumes? (y/n)"
+  read -r response
   case $response in
     [yY])
       defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
@@ -427,6 +431,7 @@ else
 
   echo ""
   echo "Disable disk image verification? (y/n)"
+  read -r response
   case $response in
     [yY])
       defaults write com.apple.frameworks.diskimages skip-verify -bool true
@@ -453,6 +458,7 @@ else
 
   echo "Wipe all (default) app icons from the Dock? (y/n)"
   echo "(This is only really useful when setting up a new Mac, or if you don't use the Dock to launch apps.)"
+  read -r response
   case $response in
     [yY])
       defaults write com.apple.dock persistent-apps -array
@@ -471,6 +477,7 @@ else
 
   echo ""
   echo "Set Dock to auto-hide and remove the auto-hiding delay? (y/n)"
+  read -r response
   case $response in
     [yY])
       defaults write com.apple.dock autohide -bool true
@@ -550,7 +557,8 @@ else
 
   echo ""
   echo "Prevent Time Machine from prompting to use new hard drives as backup volume? (y/n)"
-    case $response in
+  read -r response
+  case $response in
     [yY])
       defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
       break;;
@@ -559,7 +567,8 @@ else
 
   echo ""
   echo "Disable local Time Machine backups? (This can take up a ton of SSD space on <128GB SSDs) (y/n)"
-    case $response in
+  read -r response
+  case $response in
     [yY])
       hash tmutil &> /dev/null && sudo tmutil disablelocal
       break;;
@@ -573,7 +582,8 @@ else
 
   echo ""
   echo "Disable automatic emoji substitution in Messages.app? (i.e. use plain text smileys) (y/n)"
-    case $response in
+  read -r response
+  case $response in
     [yY])
       defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
       break;;
@@ -582,7 +592,8 @@ else
 
   echo ""
   echo "Disable smart quotes in Messages.app? (it's annoying for messages that contain code) (y/n)"
-    case $response in
+  read -r response
+  case $response in
     [yY])
       defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
       break;;
@@ -591,7 +602,8 @@ else
 
   echo ""
   echo "Disable continuous spell checking in Messages.app? (y/n)"
-    case $response in
+  read -r response
+  case $response in
     [yY])
       defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
       break;;

@@ -274,7 +274,7 @@ echo "Turn off keyboard illumination when computer is not used for 5 minutes"
 defaults write com.apple.BezelServices kDimTime -int 300
 
 echo ""
-echo "Disable display from automatically adjusting brightness"
+echo "Disable display from automatically adjusting brightness? (y/n)"
 read -r response
 case $response in
   [yY])
@@ -304,17 +304,23 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 echo ""
 echo "Where do you want screenshots to be stored? (hit ENTER if you want ~/Desktop as default)"
+# Thanks https://github.com/omgmog
 read screenshot_location
-if [ -z "$1" ]
+echo ""
+if [ -z "${screenshot_location}" ]
 then
-  echo ""
-  echo "Setting location to ~/Desktop"
-  defaults write com.apple.screencapture location -string "$HOME/Desktop"
+  # If nothing specified, we default to ~/Desktop
+  screenshot_location="${HOME}/Desktop"
 else
-  echo ""
-  echo "Setting location to ~/$screenshot_location"
-  defaults write com.apple.screencapture location -string "$HOME/$screenshot_location"
+  # Otherwise we use input
+  if [[ "${screenshot_location:0:1}" != "/" ]]
+  then
+    # If input doesn't start with /, assume it's relative to home
+    screenshot_location="${HOME}/${screenshot_location}"
+  fi
 fi
+echo "Setting location to ${screenshot_location}"
+defaults write com.apple.screencapture location -string "${screenshot_location}"
 
 echo ""
 echo "What format should screenshots be saved as? (hit ENTER for PNG, options: BMP, GIF, JPG, PDF, TIFF) "

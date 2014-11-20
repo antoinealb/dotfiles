@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# Some things taken from here
+# Alot of these configs have been taken from the various places
+# on the web, most from here
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 
 # Set the colours you can use
@@ -225,13 +226,19 @@ case $response in
 esac
 
 echo ""
+echo "Disable the menubar transparency? (y/n)"
+read -r response
+case $response in
+  [yY])
+    defaults write com.apple.universalaccess reduceTransparency -bool true
+    break;;
+  *) break;;
+esac
+
+echo ""
 echo "Speeding up wake from sleep to 24 hours from an hour"
 # http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
 sudo pmset -a standbydelay 86400
-
-echo ""
-echo "Disabling the annoying backswipe in Chrome"
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 
 
 ################################################################################
@@ -497,8 +504,13 @@ esac
 
 
 ###############################################################################
-# Safari & WebKit
+# Chrome, Safari, & WebKit
 ###############################################################################
+
+echo ""
+echo "Privacy: Don’t send search queries to Apple"
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
 echo ""
 echo "Hiding Safari's bookmarks bar by default"
@@ -533,6 +545,16 @@ defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.Web
 echo ""
 echo "Adding a context menu item for showing the Web Inspector in web views"
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+echo ""
+echo "Disabling the annoying backswipe in Chrome"
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
+
+echo ""
+echo "Using the system-native print preview dialog in Chrome"
+defaults write com.google.Chrome DisablePrintPreview -bool true
+defaults write com.google.Chrome.canary DisablePrintPreview -bool true
 
 
 ###############################################################################

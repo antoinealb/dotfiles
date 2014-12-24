@@ -701,8 +701,8 @@ case $response in
   [yY])
     echo ""
     echo "Use `~/Downloads/Incomplete` to store incomplete downloads"
-    defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
     mkdir -p ~/Downloads/Incomplete
+    defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
     defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Downloads/Incomplete"
 
     echo ""

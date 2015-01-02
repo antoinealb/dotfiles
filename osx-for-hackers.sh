@@ -117,7 +117,7 @@ echo "Disable Spotlight indexing for any volume that gets mounted and has not ye
 read -r response
 case $response in
   [yY])
-    echo "Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume."
+    echo 'Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.'
     sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
     break;;
   *) break;;

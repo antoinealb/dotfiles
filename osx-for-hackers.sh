@@ -75,38 +75,8 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
 fi
 
 echo ""
-echo "Hide the Time Machine, Volume, User, and Bluetooth icons?  (y/n)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  # Get the system Hardware UUID and use it for the next menubar stuff
-  for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
-    defaults write "${domain}" dontAutoLoad -array \
-      "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-      "/System/Library/CoreServices/Menu Extras/Volume.menu" \
-      "/System/Library/CoreServices/Menu Extras/User.menu"
-  done
-
-  defaults write com.apple.systemuiserver menuExtras -array \
-    "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-    "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-    "/System/Library/CoreServices/Menu Extras/Battery.menu" \
-    "/System/Library/CoreServices/Menu Extras/Clock.menu"
-fi
-
-echo ""
-echo "Hide the Spotlight icon? (y/n)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
-fi
-
-echo ""
 echo "Disable Spotlight indexing for any volume that gets mounted and has not yet been indexed before? (y/n)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  echo 'Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.'
-  sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-fi
+sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
 echo ""
 echo "Change indexing order and disable some search results in Spotlight? (y/n)"

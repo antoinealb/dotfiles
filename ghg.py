@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import subprocess
 import sys
+import platform
 
 def github_url_from_remote(u):
     if u.startswith('https://'):
@@ -27,7 +28,11 @@ def get_remote():
     return github_url_from_remote_output(raw.decode('ascii'))
 
 def open_url(url):
-    command = 'xdg-open {url}'.format(url=url).split()
+    if 'Darwin' in platform.system():
+        command = 'open {url}'.format(url=url).split()
+    else:
+        command = 'xdg-open {url}'.format(url=url).split()
+
     subprocess.call(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def main():

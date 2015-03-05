@@ -19,11 +19,8 @@ function fish_prompt
     printf '%s ' (date +%H:%M:%S)
     printf '%s%s%s%s%s' (set_color $fish_color_cwd) (prompt_pwd) (set_color normal) 
 
-    # Prints mercurial current branch if we are in a repository.
-    printf " %s" (hg branch 2> /dev/null) 
-
     # Prints the git branch if we are in a git repository.
-    printf " %s" (git branch 2> /dev/null | grep "*" | cut --fields=2 --delimiter=" ") 
+    printf " %s" (git branch 2> /dev/null | grep "*" | cut -f 2 -d " ") 
     echo ' >'
 end
 
@@ -34,14 +31,6 @@ function g
         git status
     else
         git $argv
-    end
-end
-
-function h
-    if test (count $argv) = 0
-        hg status 
-    else
-       hg $argv 
     end
 end
 

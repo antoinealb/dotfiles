@@ -159,11 +159,6 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 ###############################################################################
 # General Power and Performance modifications
 ###############################################################################
-
-echo ""
-echo "Disabling deep hibernation"
-sudo pmset -a hibernatemode 0
-
 echo ""
 echo "Disabling Sudden Motion Sensor"
 sudo pmset -a sms 0

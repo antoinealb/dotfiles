@@ -9,7 +9,7 @@ alias "l"="ls -lh"
 alias vi=vim
 alias df="df -h"
 alias diff="colordiff -Naur"
-alias mkdir="mkdir --parents --verbose"
+alias mkdir="mkdir -pv"
 alias make="make -j6"
 
 # Set chromium as the browser for the help

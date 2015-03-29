@@ -1,7 +1,14 @@
 # Opens all parameters
 function x
-    for i in $argv
-        xdg-open $i 2> /dev/null 
+
+    if uname | grep "Darwin" then
+        for i in $argv
+            open $i 2> /dev/null
+        end
+    else
+        for i in $argv
+            open $i 2> /dev/null
+        end
     end
 end
 
@@ -17,10 +24,10 @@ set -x BROWSER chromium
 
 function fish_prompt
     printf '%s ' (date +%H:%M:%S)
-    printf '%s%s%s%s%s' (set_color $fish_color_cwd) (prompt_pwd) (set_color normal) 
+    printf '%s%s%s%s%s' (set_color $fish_color_cwd) (prompt_pwd) (set_color normal)
 
     # Prints the git branch if we are in a git repository.
-    printf " %s" (git branch 2> /dev/null | grep "*" | cut -f 2 -d " ") 
+    printf " %s" (git branch 2> /dev/null | grep "*" | cut -f 2 -d " ")
     echo ' >'
 end
 
@@ -56,6 +63,7 @@ end;
 
 set PATH /opt/microchip/xc16/v1.21/bin/ $PATH
 set PATH ~/sat/bin $PATH
+set PATH ~/arm-gcc-toolchain/bin $PATH
 set -x TERM xterm-256color
 
 # Dossier sur lesquels je bosse en ce moment

@@ -13,7 +13,8 @@ function x
 end
 
 alias "l"="ls -lh"
-alias vi=vim
+alias vi=nvim
+alias vim=nvim
 alias df="df -h"
 alias diff="colordiff -Naur"
 alias mkdir="mkdir -pv"

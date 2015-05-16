@@ -49,27 +49,14 @@ function opcode
     rm -rf _tmp.{S,o}
 end
 
-function card
-    tutor card $argv --format json | python2 -mjson.tool
-end
-
-set -X WORKON_HOME=~/.virtualenvs
-set -X PROJECT_HOME=~/code/web/mtg_inventory/
-sh /usr/local/bin/virtualenvwrapper.sh
 
 # github go
 function ghg;
     ~/dotfiles/ghg.py $argv
 end;
 
-set PATH /opt/microchip/xc16/v1.21/bin/ $PATH
-set PATH ~/sat/bin $PATH
 set PATH ~/arm-gcc-toolchain/bin $PATH
 set -x TERM xterm-256color
-
-# Dossier sur lesquels je bosse en ce moment
-alias jj='cd ~/Documents/EPFL/Bachelor56/conception_produit'
-alias optic='cd ~/Documents/EPFL/Bachelor56/TPOptique/TP'
 
 
 # If we dont put this, there is a bug in fish which causes infinite loop when there is only

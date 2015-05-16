@@ -56,6 +56,10 @@ function ghg;
 end;
 
 set PATH ~/arm-gcc-toolchain/bin $PATH
+# Path to GNU utils
+if uname | grep 'Darwin' > /dev/null
+    set PATH /usr/local/opt/gnu-sed/libexec/gnubin $PATH
+end
 set -x TERM xterm-256color
 
 

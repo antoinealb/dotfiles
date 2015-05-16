@@ -62,6 +62,8 @@ if uname | grep 'Darwin' > /dev/null
 end
 set -x TERM xterm-256color
 
+# Force mosh to use UTF-8 on OSX
+alias mosh='mosh --server="LC_CTYPE=en_US.UTF-8 LC_ALL=en_US.UTF-8 mosh-server"'
 
 # If we dont put this, there is a bug in fish which causes infinite loop when there is only
 # a single dot

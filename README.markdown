@@ -1,3 +1,8 @@
+# Installing Oh-my-fish
+ ```bash
+curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.fish | fish
+```
+
 # Set of config files
 
 Where should you link your stuff ?
@@ -8,7 +13,7 @@ ln -s ~/dotfiles/gitconfig ~/.gitconfig
 ln -s ~/dotfiles/gitignore ~/.gitignore
 ```
 
-## Disabling SSH locale forwarding in OSS
+## Disabling SSH locale forwarding in OSX
 Locale forwarding is really annoying because most Linux machines don't have the same locale names as OSX.
 To fix this simply comment the relevant `SendEnv` line in `/etc/ssh_config`, like this:
 

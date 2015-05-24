@@ -1,3 +1,20 @@
+# Path to your oh-my-fish.
+set fish_path $HOME/.oh-my-fish
+
+# Theme
+set fish_theme coffeeandcode
+
+# All built-in plugins can be found at ~/.oh-my-fish/plugins/
+# Custom plugins may be added to ~/.oh-my-fish/custom/plugins/
+# Enable plugins by adding their name separated by a space to the line below.
+set fish_plugins themes
+
+# Path to your custom folder (default path is ~/.oh-my-fish/custom)
+#set fish_custom $HOME/dotfiles/oh-my-fish
+
+# Load oh-my-fish configuration.
+. $fish_path/oh-my-fish.fish
+#
 # Opens all parameters
 function x
 
@@ -12,28 +29,6 @@ function x
     end
 end
 
-alias "l"="ls -lh"
-alias vi=nvim
-alias vim=nvim
-alias df="df -h"
-alias diff="colordiff -Naur"
-alias mkdir="mkdir -pv"
-alias make="make -j6"
-
-# Set chromium as the browser for the help
-set -x BROWSER chromium
-
-function fish_prompt
-    printf '%s ' (date +%H:%M:%S)
-    printf '%s%s%s%s%s' (set_color $fish_color_cwd) (prompt_pwd) (set_color normal)
-
-    # Prints the git branch if we are in a git repository.
-    printf " %s" (git branch 2> /dev/null | grep "*" | cut -f 2 -d " ")
-    echo ' >'
-end
-
-# Shortcuts for hg and git
-
 function g
     if test (count $argv) = 0
         git status
@@ -42,30 +37,22 @@ function g
     end
 end
 
-function opcode
-    echo $argv > _tmp.S
-    nasm _tmp.S -o _tmp.o
-    ndisasm _tmp.o
-    rm -rf _tmp.{S,o}
-end
-
-
 # github go
 function ghg;
     ~/dotfiles/ghg.py $argv
 end;
+
+alias "l"="ls -lh"
+alias vi=nvim
+alias vim=nvim
+alias df="df -h"
+alias diff="colordiff -Naur"
+alias mkdir="mkdir -pv"
+alias make="make -j6"
+alias mosh='mosh --server="LC_CTYPE=en_US.UTF-8 LC_ALL=en_US.UTF-8 mosh-server"'
 
 set PATH ~/arm-gcc-toolchain/bin $PATH
 # Path to GNU utils
 if uname | grep 'Darwin' > /dev/null
     set PATH /usr/local/opt/gnu-sed/libexec/gnubin $PATH
 end
-set -x TERM xterm-256color
-
-# Force mosh to use UTF-8 on OSX
-alias mosh='mosh --server="LC_CTYPE=en_US.UTF-8 LC_ALL=en_US.UTF-8 mosh-server"'
-
-# If we dont put this, there is a bug in fish which causes infinite loop when there is only
-# a single dot
-
-

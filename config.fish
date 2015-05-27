@@ -51,8 +51,13 @@ alias mkdir="mkdir -pv"
 alias make="make -j6"
 alias mosh='mosh --server="LC_CTYPE=en_US.UTF-8 LC_ALL=en_US.UTF-8 mosh-server"'
 
-set PATH ~/arm-gcc-toolchain/bin $PATH
 # Path to GNU utils
 if uname | grep 'Darwin' > /dev/null
     set PATH /usr/local/opt/gnu-sed/libexec/gnubin $PATH
+    set PATH ~/arm-gcc-toolchain/bin $PATH
 end
+
+if uname | grep 'Linux' > /dev/null
+    set PATH ~/sat/bin $PATH
+end
+

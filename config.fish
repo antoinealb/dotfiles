@@ -14,15 +14,15 @@ set fish_plugins themes
 
 # Load oh-my-fish configuration.
 . $fish_path/oh-my-fish.fish
-#
+
 # Opens all parameters
 function x
-
-    if uname | grep "Darwin" then
+    switch (uname)
+    case Linux
         for i in $argv
-            open $i 2> /dev/null
+            xdg-open $i 2> /dev/null
         end
-    else
+    case Darwin
         for i in $argv
             open $i 2> /dev/null
         end
@@ -54,13 +54,15 @@ alias mkdir="mkdir -pv"
 alias make="make -j6"
 alias mosh='mosh --server="LC_CTYPE=en_US.UTF-8 LC_ALL=en_US.UTF-8 mosh-server"'
 
-# Path to GNU utils
-if uname | grep 'Darwin' > /dev/null
+# Path to GNU utils, needed on OSX
+if test (uname) = "Darwin"
     set PATH /usr/local/opt/gnu-sed/libexec/gnubin $PATH
-    set PATH ~/arm-gcc-toolchain/bin $PATH
 end
 
-if uname | grep 'Linux' > /dev/null
-    set PATH ~/sat/bin $PATH
+# Set ARM toolchain path
+switch (uname)
+    case Darwin
+        set PATH ~/arm-gcc-toolchain/bin $PATH
+    case Linux
+        set PATH ~/sat/bin $PATH
 end
-

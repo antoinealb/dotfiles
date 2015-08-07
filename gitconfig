@@ -8,7 +8,7 @@
 [core]
 	editor = vim
 	autocrlf = input
-	excludesfile = /Users/antoine/.gitignore
+	excludesfile = ~/.gitignore
 [push]
 	default = matching
 

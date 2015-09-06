@@ -1,6 +1,6 @@
 # Installing Oh-my-fish
  ```bash
-curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.fish | fish
+curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | sh
 ```
 
 # Set of config files

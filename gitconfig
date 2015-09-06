@@ -16,5 +16,15 @@
 [alias]
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
+# Clone the project you want to watch, and type git ribbon to initialize the
+# ribbon marker.
+# Now whenever you fetch or pull, use git catchup to read up on the latest
+# changes in the origin/master branch. After you are done reading, update the
+# ribbon marker with git ribbon.
+# Source: http://gitready.com/advanced/2011/10/21/ribbon-and-catchup-reading-new-commits.html
+[alias]
+    ribbon = tag --force _ribbon HEAD
+    catchup = log --patch --reverse --topo-order _ribbon..HEAD
+
 [credential]
 	helper = cache --timeout=3600

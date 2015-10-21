@@ -26,3 +26,6 @@ node_modules
 
 # GDB command history
 .gdb_history
+
+# Ctags file
+tags

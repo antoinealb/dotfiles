@@ -40,10 +40,6 @@ end
 function c
     python3 -c "from math import *; print($argv)"
 end
-# github go
-function ghg;
-    ~/dotfiles/ghg.py $argv
-end;
 
 alias "l"="ls -lh"
 alias vi=nvim

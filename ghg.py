@@ -2,6 +2,7 @@
 import subprocess
 import sys
 import platform
+import argparse
 
 
 def github_url_from_remote(u):
@@ -42,17 +43,29 @@ def open_url(url):
                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
+def parse_arguments(args=None):
+    parser = argparse.ArgumentParser(description="Opens a Github URL.")
+    parser.add_argument("repository",
+                        help="Repository to open (e.g. antoinealb/ghg).",
+                        nargs='?',
+                        action='store',
+                        default=None)
+
+    return parser.parse_args(args)
+
+
 def main():
-    if len(sys.argv) > 1:
-        url = 'https://github.com/{repo}'.format(repo=sys.argv[1])
+    args = parse_arguments()
+
+    if args.repository:
+        url = 'https://github.com/{}'.format(args.repository)
         open_url(url)
-        return
-
-    remote = get_remote()
-    if remote is None:
-        print('No remote')
-
-    open_url(remote)
+    else:
+        remote = get_remote()
+        if remote is None:
+            print('No remote')
+        else:
+            open_url(remote)
 
 if __name__ == '__main__':
     main()

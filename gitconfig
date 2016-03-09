@@ -1,7 +1,7 @@
 # vim: set filetype=gitconfig :
 [user]
 	name = Antoine Albertelli
-	email = antoinea101@gmail.com
+	email = antoine@antoinealb.net
 [color]
 	status = auto
 	branch = auto

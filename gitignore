@@ -23,6 +23,7 @@ node_modules
 
 # Vim swap files
 *.swp
+*.swo
 
 # GDB command history
 .gdb_history

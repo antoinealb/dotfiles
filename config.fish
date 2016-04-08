@@ -42,8 +42,7 @@ function c
 end
 
 alias "l"="ls -lh"
-alias vi=nvim
-alias vim=nvim
+alias vi=vim
 alias df="df -h"
 alias diff="colordiff -Naur"
 alias mkdir="mkdir -pv"

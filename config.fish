@@ -46,7 +46,7 @@ alias vi=vim
 alias df="df -h"
 alias diff="colordiff -Naur"
 alias mkdir="mkdir -pv"
-alias make="make -j6"
+alias make="make -j"
 alias mosh='mosh --server="LC_CTYPE=en_US.UTF-8 LC_ALL=en_US.UTF-8 mosh-server"'
 
 # Path to GNU utils, needed on OSX

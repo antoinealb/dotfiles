@@ -17,14 +17,18 @@ set fish_plugins themes
 
 # Opens all parameters
 function x
-    switch (uname)
-    case Linux
-        for i in $argv
-            xdg-open $i 2> /dev/null
-        end
-    case Darwin
-        for i in $argv
-            open $i 2> /dev/null
+    if test (count $argv) -eq 0
+        x .
+    else
+        switch (uname)
+        case Linux
+            for i in $argv
+                xdg-open $i 2> /dev/null
+            end
+        case Darwin
+            for i in $argv
+                open $i 2> /dev/null
+            end
         end
     end
 end

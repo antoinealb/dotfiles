@@ -18,6 +18,10 @@
 
 [credential]
 	helper = cache --timeout=3600
+
+[diff]
+    indentHeuristic = true
+
 [status]
 	submoduleSummary = true
 [rebase]

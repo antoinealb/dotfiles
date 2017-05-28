@@ -1,8 +1,3 @@
---
--- xmonad config file.
---
--- (c) Antoine Albertelli 2014
-
 import XMonad
 import XMonad.Util.EZConfig -- used for key bindings
 
@@ -13,6 +8,10 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Config.Kde
 
+keyBindings =
+    [ ("M-S-w", spawn "google-chrome-stable")
+    , ("M-S-e", spawn "dolphin")
+    ]
 
 defaults = kdeConfig {
       -- simple stuff
@@ -20,6 +19,6 @@ defaults = kdeConfig {
         manageHook         = manageDocks <+> manageHook defaultConfig,
         layoutHook         = avoidStruts $ layoutHook defaultConfig,
         focusFollowsMouse  = False
-    }
+    } `additionalKeysP` keyBindings
 
 main = xmonad $ ewmh defaults

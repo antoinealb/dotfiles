@@ -7,6 +7,7 @@ import XMonad.Hooks.ManageDocks
 -- Extended Window Manager Hints, useful for OOo
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Config.Kde
+import XMonad.Layout.Spacing
 
 keyBindings =
     [ ("M-S-w", spawn "google-chrome-stable")
@@ -17,7 +18,7 @@ defaults = kdeConfig {
       -- simple stuff
         terminal           = "konsole",
         manageHook         = manageDocks <+> manageHook defaultConfig,
-        layoutHook         = avoidStruts $ layoutHook defaultConfig,
+        layoutHook         = avoidStruts $ spacing 10 $ layoutHook defaultConfig,
         focusFollowsMouse  = False
     } `additionalKeysP` keyBindings
 

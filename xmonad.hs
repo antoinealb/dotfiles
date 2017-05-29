@@ -14,10 +14,12 @@ keyBindings =
     , ("M-S-e", spawn "dolphin")
     ]
 
+floatWindows = composeAll [ className =? "plasmashell" --> doFloat]
+
 defaults = kdeConfig {
       -- simple stuff
         terminal           = "konsole",
-        manageHook         = manageDocks <+> manageHook defaultConfig,
+        manageHook         = floatWindows <+> manageDocks <+> manageHook defaultConfig,
         layoutHook         = avoidStruts $ spacing 10 $ layoutHook defaultConfig,
         focusFollowsMouse  = False
     } `additionalKeysP` keyBindings

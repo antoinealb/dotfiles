@@ -8,7 +8,7 @@ curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | sh
 Where should you link your stuff ?
 
 ```sh
-ln -s ~/dotfiles/config.fish ~/.config/fish/config.fish
+ln -s ~/dotfiles/config.fish ~/.config/omf/init.fish
 ln -s ~/dotfiles/gitconfig ~/.gitconfig
 ln -s ~/dotfiles/gitignore ~/.gitignore
 ln -s ~/dotfiles/tmux.conf ~/.tmux.conf

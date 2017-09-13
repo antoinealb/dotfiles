@@ -22,7 +22,7 @@ function x
 end
 
 function g
-    if test (count $argv) = 0
+    if [ (count $argv) = 0 ]
         git status
     else
         git $argv
@@ -41,10 +41,3 @@ alias mkdir="mkdir -pv"
 alias make="make -j"
 alias mosh='mosh --server="LC_CTYPE=en_US.UTF-8 LC_ALL=en_US.UTF-8 mosh-server"'
 
-# Set ARM toolchain path
-switch (uname)
-    case Darwin
-        set PATH ~/arm-gcc-toolchain/bin $PATH
-    case Linux
-        set PATH ~/sat/bin $PATH
-end

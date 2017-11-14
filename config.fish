@@ -1,8 +1,3 @@
-# Adds the path to pkgsrc installed tools
-if [ (uname) = "Darwin" ]
-    set PATH /opt/pkg/bin /opt/pkg/sbin $PATH
-end
-
 # Opens all parameters
 function x
     if test (count $argv) -eq 0

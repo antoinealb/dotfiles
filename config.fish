@@ -29,6 +29,14 @@ function g
     end
 end
 
+function cvrafmt
+    for i in $argv
+        # We have to run it twice due to uncrustify bugs
+        uncrustify --replace --no-backup -c ~/src/cvra/coding-style/uncrustify.cfg $i
+        uncrustify --replace --no-backup -c ~/src/cvra/coding-style/uncrustify.cfg $i
+    end
+end
+
 function c
     python3 -c "from math import *; print($argv)"
 end

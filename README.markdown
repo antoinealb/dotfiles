@@ -25,3 +25,25 @@ To fix this simply comment the relevant `SendEnv` line in `/etc/ssh_config`, lik
 Host *
 #   SendEnv LANG LC_*
 ```
+# Enabling smartcard support for gpg
+
+1. Install gpg > 2.1 and pinentry-mac
+2. Put the following in ~/.gnupg/gpg-agent.conf
+3. Put the following in your fish config
+4. Restart gpg agent by running `gpg-connect-agent killagent /bye` and `gpg-connect-agent /bye`.
+
+```
+# GPG conf
+pinentry-program /usr/local/bin/pinentry-mac
+enable-ssh-support
+```
+
+```
+# Fish config
+set -x GPG_TTY (tty)
+set -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+
+# Bash config
+export "GPG_TTY=$(tty)"
+export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
+```

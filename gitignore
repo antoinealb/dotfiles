@@ -34,3 +34,6 @@ tags
 
 # Uncrustify backup
 *.uncrustify
+
+# Clang compilation DB, used by youcompleteme
+compile_commands.json

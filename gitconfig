@@ -1,7 +1,7 @@
 # vim: set filetype=gitconfig :
 [user]
 	name = Antoine Albertelli
-	email = antoine@antoinealb.net
+	email = antoinealb@google.com
 [color]
 	status = auto
 	branch = auto
@@ -23,7 +23,7 @@
     indentHeuristic = true
 
 [status]
-	submoduleSummary = true
+#	submoduleSummary = true
 [rebase]
 	autoStash = true
 [log]

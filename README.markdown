@@ -47,3 +47,15 @@ set -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
 export "GPG_TTY=$(tty)"
 export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
 ```
+
+# Disabling OSX non breaking spaces
+
+Source: https://superuser.com/questions/78245/how-to-disable-the-option-space-key-combination-for-non-breaking-spaces
+
+Put the following in `~/Library/KeyBindings/DefaultKeyBinding.dict` (need to create the file and directory):
+
+```
+{
+"~ " = ("insertText:", " ");
+}
+```

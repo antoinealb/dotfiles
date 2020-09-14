@@ -36,3 +36,6 @@ alias mkdir="mkdir -pv"
 alias make="make -j4"
 alias mosh='mosh --server="LC_CTYPE=en_US.UTF-8 LC_ALL=en_US.UTF-8 mosh-server"'
 
+if [ $SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/keyring/ssh" ]
+    set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
+end

@@ -8,13 +8,13 @@ curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | sh
 Where should you link your stuff ?
 
 ```sh
-ln -s ~/dotfiles/config.fish ~/.config/omf/init.fish
-ln -s ~/dotfiles/gitconfig ~/.gitconfig
-ln -s ~/dotfiles/gitignore ~/.gitignore
-ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
-ln -s ~/dotfiles/amethyst.json .amethyst
-ln -s ~/dotfiles/xmonad.hs ~/.xmonad/xmonad.hs
-ln -s ~/dotfiles/gdbinit ~/.gdbinit
+ln -s (pwd)/config.fish ~/.config/omf/init.fish
+ln -s (pwd)/gitconfig ~/.gitconfig
+ln -s (pwd)/gitignore ~/.gitignore
+ln -s (pwd)/tmux.conf ~/.tmux.conf
+ln -s (pwd)/amethyst.json .amethyst
+ln -s (pwd)/xmonad.hs ~/.xmonad/xmonad.hs
+ln -s (pwd)/gdbinit ~/.gdbinit
 ```
 
 ## Disabling SSH locale forwarding in OSX

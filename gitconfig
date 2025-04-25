@@ -6,12 +6,28 @@
 	status = auto
 	branch = auto
 	ui = true
+[column]
+    ui = auto
+
+[commit]
+    verbose = true
+
+[tag]
+    sort = version:refname
+
 [core]
 	editor = vim
 	autocrlf = input
 	excludesfile = ~/.gitignore
+
 [push]
 	default = matching
+
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
+
 
 [alias]
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -21,10 +37,16 @@
 
 [diff]
     indentHeuristic = true
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
 
-[status]
-#	submoduleSummary = true
 [rebase]
 	autoStash = true
+[rerere]
+    enabled = true
+    autoupdate = true
+
 [log]
 	decorate = full

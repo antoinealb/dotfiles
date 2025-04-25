@@ -25,7 +25,7 @@ function g
 end
 
 function c
-    python3 -c "from math import *; print($argv)"
+    python3 -c "from math import *; from datetime import *; print($argv)"
 end
 
 alias "l"="ls -lh"
